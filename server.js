@@ -15,6 +15,13 @@ app.configure(function() {
 	app.use(express.methodOverride()); 						// simulate DELETE and PUT
 });
 
+// api    ======================================================================
+require('./app/api/project.js')(app);
+require('./app/api/resource.js')(app);
+require('./app/api/task.js')(app);
+require('./app/api/team.js')(app);
+require('./app/api/user.js')(app);
+
 // routes ======================================================================
 require('./app/routes.js')(app);
 
