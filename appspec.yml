@@ -3,12 +3,6 @@ os: linux
 files:
 - source: /
   destination: /usr/local/projects/mean-yeti
-permissions:
-  - object: bin
-    pattern: "*"
-    owner: root
-    group: root
-    mode: 777
 hooks:
   AfterInstall:
     - location: bin/install-pkgs
