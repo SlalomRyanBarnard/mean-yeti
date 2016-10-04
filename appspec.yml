@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+- source: /
+  destination: /usr/local/projects/mean-yeti
+hooks:
+  AfterInstall:
+    - location: bin/install-pkgs
+      timeout: 1200
+      runas: root
+  ApplicationStart:
+    - location: bin/app-start
+      timeout: 60
+      runas: root
