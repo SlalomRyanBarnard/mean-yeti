@@ -1,2 +1,2 @@
-cd /home/ubuntu/mean-yeti/
-killall node 2>/dev/null || true
+#!/bin/sh
+forever stopall
