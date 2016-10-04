@@ -2,9 +2,9 @@
 
     'use strict';
 
-    angular.module('mean-yeti').controller('admin.controller', ['$scope', AdminController]);
+    angular.module('mean-yeti').controller('admin.controller', ['$scope', 'Api', AdminController]);
 
-    function AdminController($scope) {
+    function AdminController($scope, api) {
 
         // Sets up a namespace to put data
         $scope.vm = {};
@@ -25,6 +25,14 @@
         $scope.func = {};
         var func = $scope.func;
 
+        /**
+         *
+         */
+        func.createProject = function() {
+
+            console.log(vm.project);
+            api.create(api.endpoint.project, vm.project);
+        };
 
         // Start
         activate();

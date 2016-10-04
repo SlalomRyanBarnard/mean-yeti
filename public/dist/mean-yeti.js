@@ -1,10 +1,14 @@
-(function(angular) {
+angular.module('mean-yeti', [ 'ngSanitize' ])
+    .config(['$compileProvider', function ($compileProvider) {
+        // disable debug info
+        $compileProvider.debugInfoEnabled(false);
+    }]);;(function(angular) {
 
     'use strict';
 
-    angular.module('mean-yeti').controller('admin.controller', ['$scope', AdminController]);
+    angular.module('mean-yeti').controller('admin.controller', ['$scope', 'Api', AdminController]);
 
-    function AdminController($scope) {
+    function AdminController($scope, api) {
 
         // Sets up a namespace to put data
         $scope.vm = {};
@@ -25,6 +29,14 @@
         $scope.func = {};
         var func = $scope.func;
 
+        /**
+         *
+         */
+        func.createProject = function() {
+
+            console.log(vm.project);
+            api.create(api.endpoint.project, vm.project);
+        };
 
         // Start
         activate();
@@ -132,6 +144,8 @@ function ApiService($http) {
      * @param body
      */
     function create (endpoint, body) {
+        console.log('CREATING ' + endpoint);
+        console.log(body);
         return $http({
             method: 'POST',
             url: apiPrefix + endpoint,

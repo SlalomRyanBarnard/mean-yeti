@@ -19,13 +19,14 @@
     <!-- Angular -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.min.js"></script>
+    <script src="/dist/mean-yeti.min.js"></script>
 
 
 </head>
 
-<body>
+<body ng-app="mean-yeti">
 
-<div id="wrapper">
+<div id="wrapper" ng-controller="admin.controller">
 
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -112,23 +113,24 @@
                             <form class="form-horizontal">
                                 <div class="form-group"><label class="col-lg-2 control-label">Name</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="Name" class="form-control">
+                                        <input type="text" placeholder="Name" class="form-control" ng-model="vm.project.name">
                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Start Date</label>
                                     <div class="col-lg-10">
-                                        <input type="date" placeholder="Start Date" class="form-control">
+                                        <input type="date" placeholder="Start Date" class="form-control" ng-model="vm.project.startDate">
                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">End Date</label>
                                     <div class="col-lg-10">
-                                        <input type="date" placeholder="End Date" class="form-control">
+                                        <input type="date" placeholder="End Date" class="form-control" ng-model="vm.project.endDate">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-sm btn-white" type="submit">Create</button>
+                                        <button class="btn btn-sm btn-white" type="button" ng-click="func.createProject()">Create</button>
                                     </div>
+                                    <p>{{ vm.project.name }}</p>
                                 </div>
                             </form>
                         </div>
@@ -137,11 +139,8 @@
             </div>
         </div>
         <div class="footer">
-            <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
             <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2017
+                <strong>Copyright</strong> MEAN YETI &copy; 2016-
             </div>
         </div>
 

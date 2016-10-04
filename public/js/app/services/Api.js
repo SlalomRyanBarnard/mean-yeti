@@ -56,6 +56,8 @@ function ApiService($http) {
      * @param body
      */
     function create (endpoint, body) {
+        console.log('CREATING ' + endpoint);
+        console.log(body);
         return $http({
             method: 'POST',
             url: apiPrefix + endpoint,
