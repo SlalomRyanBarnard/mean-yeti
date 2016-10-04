@@ -14,6 +14,10 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
         $scope.vm = {};
         var vm = $scope.vm;
 
+        vm.showing = '';
+        vm.editingProject = false;
+        vm.editingProjectId = '';
+
         vm.project = {
             name: '',
             startDate: '',
@@ -26,7 +30,11 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
         };
 
         // Sets up a namespace to put functions
-        $scope.func = {};
+        $scope.func = {
+            selectDataType: selectDataType,
+            editProject: editProject,
+            deleteProject: deleteProject,
+        };
         var func = $scope.func;
 
         /**
@@ -42,6 +50,28 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
         activate();
 
         function activate() { }
+
+        function selectDataType(dataType) {
+            vm.showing = dataType;
+
+            if(dataType === 'projects') {
+                api.getAll(dataType).then(function(result) {
+                    console.log(result.data);
+                   vm.projects = result.data;
+                });
+            }
+        }
+
+        function editProject(id) {
+            vm.editingProject = true;
+            vm.editingProjectId = id;
+        }
+
+        function deleteProject(id) {
+            api.remove('projects', id).then(function() {
+                func.selectDataType('projects');
+            });
+        }
     }
 }(angular));
 ;angular.module('todoController', [])

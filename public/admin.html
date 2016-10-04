@@ -95,32 +95,32 @@
                         <div class="ibox-content">
                             <form class="form-horizontal">
                                 <p>
-                                    <a href="" ng-click="func.selectDataType('project');">&bull;&nbsp;Projects</a>
+                                    <a href="" ng-click="func.selectDataType('projects');">&bull;&nbsp;Projects</a>
                                 </p>
                                 <p>
-                                    <a href="" ng-click="func.selectDataType('task');">&bull;&nbsp;Tasks</a>
-                                </p>
-                                <p>&nbsp;</p>
-                                <p>
-                                    <a href="" ng-click="func.selectDataType('team');">&bull;&nbsp;Team</a>
-                                </p>
-                                <p>
-                                    <a href="" ng-click="func.selectDataType('resource');">&bull;&nbsp;Resource</a>
+                                    <a href="" ng-click="func.selectDataType('tasks');">&bull;&nbsp;Tasks</a>
                                 </p>
                                 <p>&nbsp;</p>
                                 <p>
-                                    <a href="" ng-click="func.selectDataType('user');">&bull;&nbsp;User</a>
+                                    <a href="" ng-click="func.selectDataType('teams');">&bull;&nbsp;Team</a>
+                                </p>
+                                <p>
+                                    <a href="" ng-click="func.selectDataType('resources');">&bull;&nbsp;Resource</a>
+                                </p>
+                                <p>&nbsp;</p>
+                                <p>
+                                    <a href="" ng-click="func.selectDataType('users');">&bull;&nbsp;User</a>
                                 </p>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7" ng-show="vm.showing !== 'project'">
+                <div class="col-lg-7" ng-show="vm.showing === 'projects'">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Projects</h5>
                             <div class="ibox-tools">
-                                <a class="close-link">
+                                <a class="" ng-click="vm.showing = ''">
                                     <i class="fa fa-times"></i>
                                 </a>
                             </div>
@@ -132,27 +132,18 @@
                                         <thead>
                                         <tr>
                                             <td></td>
-                                            <td>ID</td>
                                             <td>Name</td>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
+                                        <tr ng-repeat="project in vm.projects">
                                             <td style="width: 60px;">
-                                                <a href="#"><i class="fa fa-edit text-navy"></i></a> &nbsp;
-                                                <a href="#"><i class="fa fa-trash text-navy"></i></a>
-                                                </td>
-                                            <td style="width: 40px;">1</td>
-                                            <td>Master project</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 60px;">
-                                                <a href="#"><i class="fa fa-edit text-navy"></i></a> &nbsp;
-                                                <a href="#"><i class="fa fa-trash text-navy"></i></a>
+                                                <a href="" ng-click="func.editProject(project._id);"><i class="fa fa-edit text-navy"></i></a> &nbsp;
+                                                <a href="" ng-click="func.deleteProject(project._id);"><i class="fa fa-trash text-navy"></i></a>
                                             </td>
-                                            <td style="width: 40px;">1</td>
-                                            <td>Master project 2</td>
+                                            <td>{{project.name}}</td>
                                         </tr>
+
                                         </tbody>
                                     </table>
                                     <input type="button" value="Create a New Project" />
@@ -161,7 +152,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
+            </div>
+            <div class="row" ng-show="vm.editingProject === true">
+                <div class="col-lg-5 col-lg-offset-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>New Project</h5>
