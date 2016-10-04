@@ -10,6 +10,15 @@
         $scope.vm = {};
         var vm = $scope.vm;
 
+        $scope.func = {};
+        var func = $scope.func;
+
+        func = {
+            selectDataType: selectDataType
+        };
+
+        vm.showing = '';
+
         vm.project = {
             name: '',
             startDate: '',
@@ -38,5 +47,10 @@
         activate();
 
         function activate() { }
+
+        function selectDataType(dataType) {
+            console.log('asdf');
+            vm.showing = dataType;
+        }
     }
 }(angular));

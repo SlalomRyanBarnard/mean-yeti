@@ -87,6 +87,80 @@
         <!-- Project Form TODO: Create Component-->
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
+                <div class="col-lg-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Data Types</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <p>
+                                    <a href="" ng-click="func.selectDataType('project');">&bull;&nbsp;Projects</a>
+                                </p>
+                                <p>
+                                    <a href="" ng-click="func.selectDataType('task');">&bull;&nbsp;Tasks</a>
+                                </p>
+                                <p>&nbsp;</p>
+                                <p>
+                                    <a href="" ng-click="func.selectDataType('team');">&bull;&nbsp;Team</a>
+                                </p>
+                                <p>
+                                    <a href="" ng-click="func.selectDataType('resource');">&bull;&nbsp;Resource</a>
+                                </p>
+                                <p>&nbsp;</p>
+                                <p>
+                                    <a href="" ng-click="func.selectDataType('user');">&bull;&nbsp;User</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7" ng-show="vm.showing !== 'project'">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Projects</h5>
+                            <div class="ibox-tools">
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td>ID</td>
+                                            <td>Name</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td style="width: 60px;">
+                                                <a href="#"><i class="fa fa-edit text-navy"></i></a> &nbsp;
+                                                <a href="#"><i class="fa fa-trash text-navy"></i></a>
+                                                </td>
+                                            <td style="width: 40px;">1</td>
+                                            <td>Master project</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 60px;">
+                                                <a href="#"><i class="fa fa-edit text-navy"></i></a> &nbsp;
+                                                <a href="#"><i class="fa fa-trash text-navy"></i></a>
+                                            </td>
+                                            <td style="width: 40px;">1</td>
+                                            <td>Master project 2</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <input type="button" value="Create a New Project" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-5">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
