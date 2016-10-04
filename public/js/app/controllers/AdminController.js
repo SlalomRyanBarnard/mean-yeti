@@ -10,14 +10,9 @@
         $scope.vm = {};
         var vm = $scope.vm;
 
-        $scope.func = {};
-        var func = $scope.func;
-
-        func = {
-            selectDataType: selectDataType
-        };
-
         vm.showing = '';
+        vm.editingProject = false;
+        vm.editingProjectId = '';
 
         vm.project = {
             name: '',
@@ -31,7 +26,11 @@
         };
 
         // Sets up a namespace to put functions
-        $scope.func = {};
+        $scope.func = {
+            selectDataType: selectDataType,
+            editProject: editProject,
+            deleteProject: deleteProject,
+        };
         var func = $scope.func;
 
         /**
@@ -49,8 +48,25 @@
         function activate() { }
 
         function selectDataType(dataType) {
-            console.log('asdf');
             vm.showing = dataType;
+
+            if(dataType === 'projects') {
+                api.getAll(dataType).then(function(result) {
+                    console.log(result.data);
+                   vm.projects = result.data;
+                });
+            }
+        }
+
+        function editProject(id) {
+            vm.editingProject = true;
+            vm.editingProjectId = id;
+        }
+
+        function deleteProject(id) {
+            api.remove('projects', id).then(function() {
+                func.selectDataType('projects');
+            });
         }
     }
 }(angular));
