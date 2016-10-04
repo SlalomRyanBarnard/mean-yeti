@@ -5,18 +5,18 @@ files:
   destination: /home/ubuntu/mean-yeti
 hooks:
   ApplicationStop:
-    - location: bin/app-stop
+    - location: /home/ubuntu/mean-yeti/bin/app-stop
       timeout: 10
       runas: ubuntu
   AfterInstall:
-    - location: bin/install-pkgs
+    - location: /home/ubuntu/mean-yeti/bin/install-pkgs
       timeout: 1200
       runas: ubuntu
   ApplicationStart:
-    - location: bin/app-start
+    - location: /home/ubuntu/mean-yeti/bin/app-start
       timeout: 60
       runas: ubuntu
   ValidateService:
-    - location: bin/app-validate
+    - location: /home/ubuntu/mean-yeti/bin/app-validate
       timeout: 10
       runas: ubuntu
