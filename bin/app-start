@@ -1,3 +1,3 @@
 cd /home/ubuntu/mean-yeti/
-forever start server.js
+forever start /home/ubuntu/mean-yeti/server.js
 true
