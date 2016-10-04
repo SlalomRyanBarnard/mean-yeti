@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/mean-yeti.iml" filepath="$PROJECT_DIR$/.idea/mean-yeti.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mean-yeti.iml" filepath="$PROJECT_DIR$/mean-yeti.iml" />
     </modules>
   </component>
 </project>
