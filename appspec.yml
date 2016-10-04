@@ -7,7 +7,7 @@ hooks:
   ApplicationStop:
     - location: bin/app-stop
       timeout: 10
-      runas: root
+      runas: ubuntu
   AfterInstall:
     - location: bin/install-pkgs
       timeout: 1200
@@ -15,4 +15,4 @@ hooks:
   ApplicationStart:
     - location: bin/app-start
       timeout: 60
-      runas: root
+      runas: ubuntu
