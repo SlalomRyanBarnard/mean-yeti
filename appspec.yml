@@ -2,21 +2,19 @@ version: 0.0
 os: linux
 files:
 - source: /
-  destination: /home/ubuntu/mean-yeti
+  destination: /usr/local/projects/mean-yeti
+permissions:
+  - object: bin
+    pattern: "*"
+    owner: root
+    group: root
+    mode: 777
 hooks:
-  ApplicationStop:
-    - location: /home/ubuntu/mean-yeti/bin/app-stop
-      timeout: 10
-      runas: ubuntu
   AfterInstall:
-    - location: /home/ubuntu/mean-yeti/bin/install-pkgs
+    - location: bin/install-pkgs
       timeout: 1200
-      runas: ubuntu
+      runas: root
   ApplicationStart:
-    - location: /home/ubuntu/mean-yeti/bin/app-start
+    - location: bin/app-start
       timeout: 60
-      runas: ubuntu
-  ValidateService:
-    - location: /home/ubuntu/mean-yeti/bin/app-validate
-      timeout: 10
-      runas: ubuntu
+      runas: root

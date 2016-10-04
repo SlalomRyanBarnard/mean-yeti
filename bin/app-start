@@ -1,2 +1,3 @@
-cd /home/ubuntu/mean-yeti/
-npm start > /dev/null 2> /dev/null < /dev/null & echo $! > node.pid
+#!/bin/sh
+forever stopall
+forever start /usr/local/projects/mean-yeti/server.js;
