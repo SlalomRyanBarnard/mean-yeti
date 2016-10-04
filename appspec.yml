@@ -4,7 +4,7 @@ files:
 - source: /
   destination: /usr/local/projects/mean-yeti
 permissions:
-  - object: //usr/local/projects/mean-yeti/bin
+  - object: /usr/local/projects/mean-yeti/bin
     pattern: "*"
     owner: root
     group: root
