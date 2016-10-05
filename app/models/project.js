@@ -10,7 +10,9 @@ var projectSchema = new Schema({
     tags            :[String],
     team            :{ type: String, ref: 'Team' },
     deliverables    :[String],
-    systems         :[String]
+    systems         :[String],
+    priority        :[String],
+    deliveryLead    :{ type: String, ref: 'Resource' }
 });
 
 /**

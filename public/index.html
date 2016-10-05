@@ -133,62 +133,26 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="wrapper wrapper-content">
-                            <div class="row">
+                            <div ng-show="vm.currentUser.projects.length > 0" class="row">
                                 <div class="col-lg-12">
                                     <h3>Watched Projects</h3>
                                 </div>
                             </div>
                             <!-- status charts -->
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="ibox float-e-margins">
-                                        <div class="ibox-title">
-                                            <h5>BOD Reg 2</h5>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div>
-                                                <canvas id="project1StatusChart"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div ng-show="vm.currentUser.projects.length > 0" class="row">
 
-                                <div class="col-lg-3">
+                                <div class="col-lg-3" ng-repeat="project in vm.projects" ng-show="vm.currentUser.projects.indexOf(project._id) !== -1">
                                     <div class="ibox float-e-margins">
+                                        <a href="" ng-click="func.selectProject(project);">
                                         <div class="ibox-title">
-                                            <h5>TBB User API</h5>
+                                            <h5 ng-bind="project.name"></h5>
                                         </div>
                                         <div class="ibox-content">
                                             <div>
-                                                <canvas id="project2StatusChart"></canvas>
+                                                <canvas id="statusChart{{project._id}}"></canvas>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3">
-                                    <div class="ibox float-e-margins">
-                                        <div class="ibox-title">
-                                            <h5>Project 3</h5>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div>
-                                                <canvas id="project3StatusChart"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3">
-                                    <div class="ibox float-e-margins">
-                                        <div class="ibox-title">
-                                            <h5>Project 4</h5>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div>
-                                                <canvas id="project4StatusChart"></canvas>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +160,7 @@
 
 
                             <!-- project deeper dive -->
-                                <div class="row">
+                                <div class="row" id="projectDetails" ng-show="vm.selectedProject !== undefined">
                                     <div class="col-lg-9">
                                         <div class="wrapper wrapper-content animated fadeInUp">
                                             <div class="ibox">
@@ -204,7 +168,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="m-b-md">
-                                                                <h2>BOD Registration Iteration 2</h2>
+                                                                <h2 ng-bind="vm.selectedProject.name"></h2>
                                                             </div>
                                                             <dl class="dl-horizontal">
                                                                 <dt>Status:</dt> <dd><span class="label label-primary">Active</span></dd>
@@ -641,29 +605,22 @@
                                     <div class="col-lg-3">
                                         <div class="wrapper wrapper-content project-manager">
                                             <h4>Project description</h4>
-                                            <p class="small">
-                                               BOD Registration Iteration 2 involves Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                            <p class="small" ng-bind="vm.selectedProject.description">
                                             </p>
                                             <p class="small font-bold">
                                                 <span><i class="fa fa-circle text-warning"></i> High priority</span>
                                             </p>
                                             <h5>Project tags</h5>
                                             <ul class="tag-list" style="padding: 0">
-                                                <li><a href=""><i class="fa fa-tag"></i> ByDesign</a></li>
-                                                <li><a href=""><i class="fa fa-tag"></i> API</a></li>
-                                                <li><a href=""><i class="fa fa-tag"></i> BOD</a></li>
-                                                <li><a href=""><i class="fa fa-tag"></i> Checkout</a></li>
-                                                <li><a href=""><i class="fa fa-tag"></i> Registration</a></li>
+                                                <li ng-repeat="tag in vm.selectedProject.tags"><a href=""><i class="fa fa-tag"></i> {{tag}}</a></li>
                                             </ul>
                                         </div>
+                                        <div>&nbsp;</div>
+                                        <div>&nbsp;</div>
                                         <div class="wrapper wrapper-content project-manager">
                                             <h4>Deliverables</h4>
                                             <ul class="tag-list" style="padding: 0">
-                                                <li><a href=""><i class="fa"></i> a</a></li>
-                                                <li><a href=""><i class="fa"></i> b</a></li>
-                                                <li><a href=""><i class="fa"></i> c</a></li>
-                                                <li><a href=""><i class="fa"></i> d</a></li>
-                                                <li><a href=""><i class="fa"></i> e</a></li>
+                                                <li ng-repeat="deliverable in vm.selectedProject.deliverables"><a href=""><i class="fa"></i> {{deliverable}}</a></li>
                                             </ul>
                                         </div>
                                     </div>
