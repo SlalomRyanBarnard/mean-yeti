@@ -5078,6 +5078,9 @@ dd.project-people {
   margin-left: 10px;
   line-height: 22px;
 }
+.project-description, .project-deliverables {
+  clear: both;
+}
 /* FAQ */
 .faq-item {
   padding: 20px;
