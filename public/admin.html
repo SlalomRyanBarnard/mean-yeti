@@ -152,6 +152,48 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-7" ng-show="vm.showing === 'tasks'">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Tasks</h5>
+                            <div class="ibox-tools">
+                                <a class="" ng-click="vm.showing = ''">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td>Name</td>
+                                            <td>Associated Project</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="task in vm.tasks">
+                                            <td style="width: 60px;">
+                                                <a href="" ng-click="func.editTask(task);"><i class="fa fa-edit text-navy"></i></a> &nbsp;
+                                                <a href="" ng-click="func.deleteTask(task._id);"><i class="fa fa-trash text-navy"></i></a>
+                                            </td>
+                                            <td>{{task.name}}</td>
+                                            <td>
+                                                <div ng-repeat="project in vm.projects | filter:{_id:task.project}">
+                                                    {{project.name}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <input type="button" ng-click="func.editTask(undefined);" value="Create a New Task" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row" ng-show="vm.editingProject === true">
                 <div class="col-lg-7 col-lg-offset-2">
@@ -192,7 +234,71 @@
                                         <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem === true" ng-click="func.createProject()">Create</button>
                                         <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem !== true" ng-click="func.updateProject()">Update</button>
                                     </div>
-                                    <p>{{ vm.project.name }}</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="vm.editingTask === true">
+                <div class="col-lg-7 col-lg-offset-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 ng-show="vm.isNewItem === true">New Task</h5>
+                            <h5 ng-show="vm.isNewItem !== true">Edit Task</h5>
+                            <div class="ibox-tools">
+                                <a ng-click="vm.editingTask = false">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="form-group"><label class="col-lg-2 control-label">ID</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="New Task" readonly class="form-control" ng-model="vm.editingTaskInfo._id">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Name</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Name" class="form-control" ng-model="vm.editingTaskInfo.name">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Project</label>
+                                    <div class="col-lg-10">
+                                        <select ng-model="vm.editingTaskInfo.project" ng-options="option._id as option.name for option in vm.projects"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Start Date</label>
+                                    <div class="col-lg-10">
+                                        <input type="date" placeholder="Start Date" class="form-control" ng-model="vm.editingTaskInfo.startDate">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">End Date</label>
+                                    <div class="col-lg-10">
+                                        <input type="date" placeholder="End Date" class="form-control" ng-model="vm.editingTaskInfo.endDate">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Complete</label>
+                                    <div class="col-lg-10">
+                                        <input type="checkbox" class="form-control" ng-model="vm.editingTaskInfo.isComplete">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Estimated Hours</label>
+                                    <div class="col-lg-10">
+                                        <input type="number" placeholder="0" class="form-control" ng-model="vm.editingTaskInfo.hourEstimate">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Burned Hours</label>
+                                    <div class="col-lg-10">
+                                        <input type="number" placeholder="0" class="form-control" ng-model="vm.editingTaskInfo.hoursBurned">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem === true" ng-click="func.createTask()">Create</button>
+                                        <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem !== true" ng-click="func.updateTask()">Update</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
