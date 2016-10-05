@@ -57,6 +57,9 @@ $(function () {
 
     var ctx1 = document.getElementById("project1StatusChart").getContext("2d");
     new Chart(ctx1, {type: 'radar', data: radarDataChart1, options:radarOptions});
+    
+    var ctx1b = document.getElementById("project1ActivityChart").getContext("2d");
+    new Chart(ctx1b, {type: 'radar', data: radarDataChart1, options:radarOptions});
 
     var ctx2 = document.getElementById("project2StatusChart").getContext("2d");
     new Chart(ctx2, {type: 'radar', data: radarDataChart2, options:radarOptions});
@@ -88,8 +91,8 @@ $(function () {
       data.addColumn('string', 'Dependencies');
 
       data.addRows([
-        ['Project1', 'Project 1', 'Yeti',
-         new Date(2015, 2, 22), new Date(2015, 5, 20), null, 100, null],
+        ['BODReg2', 'BOD Reg 2', 'Yeti',
+         new Date(2015, 8, 01), new Date(2015, 10, 30), null, 100, null],
         ['Project2', 'Project 2', 'Tsunami',
          new Date(2015, 5, 21), new Date(2015, 8, 20), null, 100, null],
         ['Project3', 'Project 3', 'Mystery Machine',
