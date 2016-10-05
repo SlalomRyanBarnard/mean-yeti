@@ -38,6 +38,41 @@ module.exports = {
     /**
      *
      * @param model
+     * @param details
+     * @param req
+     * @param res
+     */
+    findWithDetails: function (model, details, req, res) {
+
+        model.find().populate(details).exec(function(err, items) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(items);
+
+        });
+    },
+
+    /**
+     *
+     * @param model
+     * @param details
+     * @param req
+     * @param res
+     */
+    findOneWithDetails: function (model, id, details, req, res) {
+
+        model.findOne({ '_id' : id }).populate(details).exec(function(err, item) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(item);
+        });
+    },
+
+    /**
+     *
+     * @param model
      * @param body
      * @param req
      * @param res

@@ -12,6 +12,22 @@ module.exports = function(app) {
     });
 
     /**
+     * TODO fill details to populate
+     */
+    app.get('/api/projects/:project_id/details', function (req, res) {
+
+       crud.findOneWithDetails(Project, req.params.project_id, '', req, res);
+    });
+
+    /**
+     * TODO fill details to populate
+     */
+    app.get('/api/projects/details', function (req, res) {
+
+        crud.findWithDetails(Project, '', req, res)
+    });
+
+    /**
      * GET BY ID
      */
     app.get('/api/projects/:project_id', function(req, res) {

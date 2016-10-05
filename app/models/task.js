@@ -8,7 +8,8 @@ var taskSchema = new Schema({
     hourEstimate    :Number,
     hoursBurned     :Number,
     startDate       :Date,
-    endDate         :Date
+    endDate         :Date,
+    note            :String
 });
 
 module.exports = mongoose.model('Task', taskSchema);
