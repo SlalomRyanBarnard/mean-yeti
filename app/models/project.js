@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
-module.exports = mongoose.model('Project', {
+var projectSchema = new Schema({
     name            :String,
     startDate       :Date,
     endDate         :Date,
@@ -10,3 +11,5 @@ module.exports = mongoose.model('Project', {
     deliverables    :[String],
     systems         :[String]
 });
+
+module.exports = mongoose.model('Project', projectSchema);

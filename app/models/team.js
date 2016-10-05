@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
-module.exports = mongoose.model('Team', {
+var teamSchema = new Schema({
     name        :String,
     resources   :[String]
 });
+
+module.exports = mongoose.model('Team', teamSchema);
