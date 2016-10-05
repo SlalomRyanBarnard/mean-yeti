@@ -65,6 +65,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             deleteUser: deleteUser,
             createUser: createUser,
             updateUser: updateUser,
+            toggleSelectionOfProjectForUser: toggleSelectionOfProjectForUser,
         };
         var func = $scope.func;
 
@@ -351,6 +352,19 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             api.remove('users', id).then(function() {
                 func.selectDataType('users');
             });
+        }
+        function toggleSelectionOfProjectForUser(id) {
+            var idx = vm.editingUserInfo.projects.indexOf(id);
+
+            // is currently selected
+            if (idx > -1) {
+                vm.editingUserInfo.projects.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                vm.editingUserInfo.projects.push(id);
+            }
         }
     }
 }(angular));

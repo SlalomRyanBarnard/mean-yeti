@@ -567,6 +567,19 @@
                                         <img ng-src="{{vm.editingUserInfo.pictureUrl}}" style="max-width: 200px; max-height: 200px;">
                                     </div>
                                 </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Projects</label>
+                                    <div class="col-lg-10">
+                                        <div ng-repeat="project in vm.projects">
+                                            <input
+                                                    type="checkbox"
+                                                    name="selectedTeams[]"
+                                                    value="{{project._id}}"
+                                                    ng-checked="vm.editingUserInfo.projects.indexOf(project._id) > -1"
+                                                    ng-click="func.toggleSelectionOfProjectForUser(project._id)"
+                                            > {{project.name}}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem === true" ng-click="func.createUser()">Create</button>
