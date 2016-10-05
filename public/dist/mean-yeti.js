@@ -33,6 +33,8 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
         vm.resources = [];
         vm.users = [];
 
+        vm.systems = ['BI','.com','TBB'];
+
         // Sets up a namespace to put functions
         $scope.func = {
             selectDataType: selectDataType,
@@ -43,6 +45,8 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             deleteProject: deleteProject,
             createProject: createProject,
             updateProject: updateProject,
+            toggleSelectionOfSystemForProject: toggleSelectionOfSystemForProject,
+            toggleSelectionOfExternalTaskForProject: toggleSelectionOfExternalTaskForProject,
 
             editTask: editTask,
             deleteTask: deleteTask,
@@ -117,12 +121,17 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 
 
         function createProject() {
+            vm.editingProjectInfo.deliverables = vm.editingProjectInfo.deliverables.split(',');
+            vm.editingProjectInfo.tags = vm.editingProjectInfo.tags.split(',');
             api.create(api.endpoint.project, vm.editingProjectInfo).then(function() {
                 vm.editingProject = false;
                 func.selectDataType('projects');
             });
-        };
+        }
         function updateProject() {
+            console.log(vm.editingProjectInfo);
+            vm.editingProjectInfo.deliverables = vm.editingProjectInfo.deliverables.split(',');
+            vm.editingProjectInfo.tags = vm.editingProjectInfo.tags.split(',');
             api.update(api.endpoint.project, vm.editingProjectInfo._id, vm.editingProjectInfo).then(function() {
                 vm.editingProject = false;
                 func.selectDataType('projects');
@@ -131,6 +140,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
         function editProject(project) {
             vm.editingProject = true;
             vm.editingProjectInfo = angular.copy(project);
+            console.log(vm.editingProjectInfo);
 
             if(vm.editingProjectInfo === undefined) {
                 vm.isNewItem = true;
@@ -138,13 +148,18 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                     name: '',
                     startDate: new Date(),
                     endDate: new Date(),
-                    tasks: [],
+                    externalTasks: [],
                     tags: [],
                     team: '',
-                    deliverables: [],
+                    deliverables: '',
                     systems: []
                 };
             } else {
+                if(vm.editingProjectInfo.externalTasks === undefined) {
+                    vm.editingProjectInfo.externalTasks = [];
+                }
+                vm.editingProjectInfo.deliverables = vm.editingProjectInfo.deliverables.join(', ');
+                vm.editingProjectInfo.tags = vm.editingProjectInfo.tags.join(', ');
                 vm.editingProjectInfo.startDate = new Date(project.startDate);
                 vm.editingProjectInfo.endDate = new Date(project.endDate);
                 vm.isNewItem = false;
@@ -155,6 +170,32 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 func.selectDataType('projects');
             });
         }
+        function toggleSelectionOfSystemForProject(id) {
+            var idx = vm.editingProjectInfo.systems.indexOf(id);
+
+            // is currently selected
+            if (idx > -1) {
+                vm.editingProjectInfo.systems.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                vm.editingProjectInfo.systems.push(id);
+            }
+        }
+        function toggleSelectionOfExternalTaskForProject(id) {
+            var idx = vm.editingProjectInfo.externalTasks.indexOf(id);
+
+            // is currently selected
+            if (idx > -1) {
+                vm.editingProjectInfo.externalTasks.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                vm.editingProjectInfo.externalTasks.push(id);
+            }
+        }
 
 
         function createTask() {
@@ -162,7 +203,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 vm.editingTask = false;
                 func.selectDataType('tasks');
             });
-        };
+        }
         function updateTask() {
             api.update(api.endpoint.task, vm.editingTaskInfo._id, vm.editingTaskInfo).then(function() {
                 vm.editingTask = false;
@@ -202,7 +243,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 vm.editingTeam = false;
                 func.selectDataType('teams');
             });
-        };
+        }
         function updateTeam() {
             api.update(api.endpoint.team, vm.editingTeamInfo._id, vm.editingTeamInfo).then(function() {
                 vm.editingTeam = false;
@@ -326,7 +367,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 vm.editingUser = false;
                 func.selectDataType('users');
             });
-        };
+        }
         function updateUser() {
             api.update(api.endpoint.user, vm.editingUserInfo._id, vm.editingUserInfo).then(function() {
                 vm.editingUser = false;
