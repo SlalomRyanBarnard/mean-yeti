@@ -338,6 +338,11 @@
                                         <input type="text" placeholder="Name" class="form-control" ng-model="vm.editingProjectInfo.name">
                                     </div>
                                 </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Description</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Description" class="form-control" ng-model="vm.editingProjectInfo.description">
+                                    </div>
+                                </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Start Date</label>
                                     <div class="col-lg-10">
                                         <input type="date" placeholder="Start Date" class="form-control" ng-model="vm.editingProjectInfo.startDate">
@@ -348,6 +353,55 @@
                                         <input type="date" placeholder="End Date" class="form-control" ng-model="vm.editingProjectInfo.endDate">
                                     </div>
                                 </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Team</label>
+                                    <div class="col-lg-10">
+                                        <select ng-model="vm.editingProjectInfo.team" ng-options="team._id as team.name for team in vm.teams"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Deliverables</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Deliverables" class="form-control" ng-model="vm.editingProjectInfo.deliverables">
+                                    </div>
+                                    <label class="col-lg-2" style="font-weight: 100; font-size: 9pt">Comma separated</label>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Tags</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Tags" class="form-control" ng-model="vm.editingProjectInfo.tags">
+                                    </div>
+                                    <label class="col-lg-2" style="font-weight: 100; font-size: 9pt">Comma separated</label>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Systems</label>
+                                    <div class="col-lg-10">
+                                        <div ng-repeat="system in vm.systems">
+                                            <input
+                                                    type="checkbox"
+                                                    name="selectedTeams[]"
+                                                    value="{{system}}"
+                                                    ng-checked="vm.editingProjectInfo.systems.indexOf(system) > -1"
+                                                    ng-click="func.toggleSelectionOfSystemForProject(system)"
+                                            > {{system}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Dependencies</label>
+                                    <div class="col-lg-10">
+                                        <div ng-repeat="task in vm.tasks | filter:{project: '!' + vm.editingProjectInfo._id}">
+                                            <input
+                                                    type="checkbox"
+                                                    name="selectedTeams[]"
+                                                    value="{{task._id}}"
+                                                    ng-checked="vm.editingProjectInfo.externalTasks.indexOf(task._id) > -1"
+                                                    ng-click="func.toggleSelectionOfExternalTaskForProject(task._id)"
+                                            > {{task.name}} (<span ng-repeat="tp in vm.projects | filter:{_id:task.project}">{{tp.name}}</span>)
+                                        </div>
+                                    </div>
+                                </div>
+
+
+<!--
+                                externalTasks   :[{type: String, ref: 'Task'}],
+-->
+
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem === true" ng-click="func.createProject()">Create</button>
@@ -411,6 +465,11 @@
                                 <div class="form-group"><label class="col-lg-2 control-label">Burned Hours</label>
                                     <div class="col-lg-10">
                                         <input type="number" placeholder="0" class="form-control" ng-model="vm.editingTaskInfo.hoursBurned">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Note</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Note" class="form-control" ng-model="vm.editingTaskInfo.note">
                                     </div>
                                 </div>
                                 <div class="form-group">
