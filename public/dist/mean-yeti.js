@@ -481,6 +481,12 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 
         function selectProject(project) {
             vm.selectedProject = project;
+
+            $timeout(function() {
+                $('html, body').animate({
+                    scrollTop: $("#projectDetails").offset().top
+                }, 500);
+            }, 10);
         }
 
         function drawGanttChart() {
