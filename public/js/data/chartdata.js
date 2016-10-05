@@ -72,7 +72,7 @@ $(function () {
 
 
     google.charts.load('current', {'packages':['gantt']});
-    google.charts.setOnLoadCallback(drawChart);
+    //google.charts.setOnLoadCallback(drawChart);
 
     function daysToMilliseconds(days) {
       return days * 24 * 60 * 60 * 1000;

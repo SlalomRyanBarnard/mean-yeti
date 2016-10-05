@@ -29,7 +29,7 @@
         vm.resources = [];
         vm.users = [];
 
-        vm.systems = ['BI','.com','TBB'];
+        vm.systems = ['BI','BB.com','TBB', 'Kibo', 'ByDesign' ,'SOA', 'OAG', 'LifeRay', 'Analytics'];
 
         // Sets up a namespace to put functions
         $scope.func = {
