@@ -16,35 +16,18 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 
         vm.showing = '';
         vm.editingProject = false;
-        vm.editingProjectId = '';
-
-        vm.project = {
-            name: '',
-            startDate: '',
-            endDate: '',
-            tasks: [],
-            tags: [],
-            team: '',
-            deliverables: [],
-            systems: []
-        };
+        vm.editingProjectInfo = undefined;
+        vm.isNewItem = false;
 
         // Sets up a namespace to put functions
         $scope.func = {
             selectDataType: selectDataType,
             editProject: editProject,
             deleteProject: deleteProject,
+            createProject: createProject,
+            updateProject: updateProject,
         };
         var func = $scope.func;
-
-        /**
-         *
-         */
-        func.createProject = function() {
-
-            console.log(vm.project);
-            api.create(api.endpoint.project, vm.project);
-        };
 
         // Start
         activate();
@@ -62,9 +45,42 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             }
         }
 
-        function editProject(id) {
+        function createProject() {
+            api.create(api.endpoint.project, vm.editingProjectInfo).then(function() {
+                vm.editingProject = false;
+                func.selectDataType('projects');
+            });
+        };
+
+        function updateProject() {
+            api.update(api.endpoint.project, vm.editingProjectInfo._id, vm.editingProjectInfo).then(function() {
+                vm.editingProject = false;
+                func.selectDataType('projects');
+            });
+        }
+
+
+        function editProject(project) {
             vm.editingProject = true;
-            vm.editingProjectId = id;
+            vm.editingProjectInfo = angular.copy(project);
+
+            if(vm.editingProjectInfo === undefined) {
+                vm.isNewItem = true;
+                vm.editingProjectInfo = {
+                    name: '',
+                    startDate: new Date(),
+                    endDate: new Date(),
+                    tasks: [],
+                    tags: [],
+                    team: '',
+                    deliverables: [],
+                    systems: []
+                };
+            } else {
+                vm.editingProjectInfo.startDate = new Date(project.startDate);
+                vm.editingProjectInfo.endDate = new Date(project.endDate);
+                vm.isNewItem = false;
+            }
         }
 
         function deleteProject(id) {
