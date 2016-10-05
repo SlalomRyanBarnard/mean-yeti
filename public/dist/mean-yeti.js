@@ -146,6 +146,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 vm.isNewItem = true;
                 vm.editingProjectInfo = {
                     name: '',
+                    description: '',
                     startDate: new Date(),
                     endDate: new Date(),
                     externalTasks: [],
@@ -218,6 +219,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 vm.isNewItem = true;
                 vm.editingTaskInfo = {
                     name: '',
+                    note: '',
                     isComplete: false,
                     project: '',
                     hourEstimate: 0,
