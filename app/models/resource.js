@@ -4,7 +4,7 @@ var Schema   = mongoose.Schema;
 var resourceSchema = new Schema({
     name    :String,
     role    :String,
-    tasks   :[String],
+    tasks   :[{ type: String, ref: 'Task' }],
     skills  :[String]
 });
 

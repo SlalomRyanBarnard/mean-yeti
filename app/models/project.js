@@ -5,9 +5,9 @@ var projectSchema = new Schema({
     name            :String,
     startDate       :Date,
     endDate         :Date,
-    externalTasks   :[{type: String, ref: 'Task'}],
+    externalTasks   :[{type: String, ref: 'Task' }],
     tags            :[String],
-    team            :String,
+    team            :{ type: String, ref: 'Team' },
     deliverables    :[String],
     systems         :[String]
 });

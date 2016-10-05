@@ -4,7 +4,7 @@ var Schema   = mongoose.Schema;
 var userSchema = new Schema({
     name        :String,
     pictureUrl  :String,
-    projects    :[String]
+    projects    :[{ type: String, ref: 'Project' }]
 });
 
 module.exports = mongoose.model('User', userSchema);

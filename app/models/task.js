@@ -4,7 +4,7 @@ var Schema   = mongoose.Schema;
 var taskSchema = new Schema({
     name            :String,
     isComplete      :Boolean,
-    project         :String,
+    project         :{ type: String, ref: 'Project' },
     hourEstimate    :Number,
     hoursBurned     :Number,
     startDate       :Date,
