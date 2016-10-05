@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7" ng-show="vm.showing === 'projects'">
+                <div class="col-lg-10" ng-show="vm.showing === 'projects'">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Projects</h5>
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7" ng-show="vm.showing === 'tasks'">
+                <div class="col-lg-10" ng-show="vm.showing === 'tasks'">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Tasks</h5>
@@ -189,6 +189,125 @@
                                         </tbody>
                                     </table>
                                     <input type="button" ng-click="func.editTask(undefined);" value="Create a New Task" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10" ng-show="vm.showing === 'teams'">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Teams</h5>
+                            <div class="ibox-tools">
+                                <a class="" ng-click="vm.showing = ''">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td>Name</td>
+                                            <td># of Resources</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="team in vm.teams">
+                                            <td style="width: 60px;">
+                                                <a href="" ng-click="func.editTeam(team);"><i class="fa fa-edit text-navy"></i></a> &nbsp;
+                                                <a href="" ng-click="func.deleteTeam(team._id);"><i class="fa fa-trash text-navy"></i></a>
+                                            </td>
+                                            <td>{{team.name}}</td>
+                                            <td>{{team.resources.length}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <input type="button" ng-click="func.editTeam(undefined);" value="Create a New Team" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10" ng-show="vm.showing === 'resources'">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Resources</h5>
+                            <div class="ibox-tools">
+                                <a class="" ng-click="vm.showing = ''">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td>Name</td>
+                                            <td>Team</td>
+                                            <td>Role</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="resource in vm.resources">
+                                            <td style="width: 60px;">
+                                                <a href="" ng-click="func.editResource(resource);"><i class="fa fa-edit text-navy"></i></a> &nbsp;
+                                                <a href="" ng-click="func.deleteResource(resource._id);"><i class="fa fa-trash text-navy"></i></a>
+                                            </td>
+                                            <td>{{resource.name}}</td>
+                                            <td>
+                                                <div ng-repeat="team in vm.teams | filter:{resources:resource._id}">
+                                                    {{team.name}}
+                                                </div>
+                                            </td>
+                                            <td>{{resource.role}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <input type="button" ng-click="func.editResource(undefined);" value="Create a New Resoure" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10" ng-show="vm.showing === 'users'">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Users</h5>
+                            <div class="ibox-tools">
+                                <a class="" ng-click="vm.showing = ''">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td></td>
+                                            <td>Name</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="user in vm.users">
+                                            <td style="width: 60px;">
+                                                <a href="" ng-click="func.editUser(user);"><i class="fa fa-edit text-navy"></i></a> &nbsp;
+                                                <a href="" ng-click="func.deleteUser(user._id);"><i class="fa fa-trash text-navy"></i></a>
+                                            </td>
+                                            <td>{{user.name}}</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <input type="button" ng-click="func.editUser(undefined);" value="Create a New User" />
                                 </div>
                             </form>
                         </div>
@@ -298,6 +417,160 @@
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem === true" ng-click="func.createTask()">Create</button>
                                         <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem !== true" ng-click="func.updateTask()">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="vm.editingTeam === true">
+                <div class="col-lg-7 col-lg-offset-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 ng-show="vm.isNewItem === true">New Team</h5>
+                            <h5 ng-show="vm.isNewItem !== true">Edit Team</h5>
+                            <div class="ibox-tools">
+                                <a ng-click="vm.editingTeam = false">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="form-group"><label class="col-lg-2 control-label">ID</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="New Team" readonly class="form-control" ng-model="vm.editingTeamInfo._id">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Name</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Name" class="form-control" ng-model="vm.editingTeamInfo.name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem === true" ng-click="func.createTeam()">Create</button>
+                                        <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem !== true" ng-click="func.updateTeam()">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="vm.editingResource === true">
+                <div class="col-lg-7 col-lg-offset-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 ng-show="vm.isNewItem === true">New Resource</h5>
+                            <h5 ng-show="vm.isNewItem !== true">Edit Resource</h5>
+                            <div class="ibox-tools">
+                                <a ng-click="vm.editingResource = false">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="form-group"><label class="col-lg-2 control-label">ID</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="New Resource" readonly class="form-control" ng-model="vm.editingResourceInfo._id">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Name</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Name" class="form-control" ng-model="vm.editingResourceInfo.name">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Team</label>
+                                    <div class="col-lg-10">
+                                        <div ng-repeat="team in vm.teams">
+                                            <input
+                                                    type="checkbox"
+                                                    name="selectedTeams[]"
+                                                    value="{{team._id}}"
+                                                    ng-checked="vm.selectedTeamsForResource.indexOf(team._id) > -1"
+                                                    ng-click="func.toggleSelectionOfTeamForResource(team._id)"
+                                            > {{team.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Role</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" ng-model="vm.editingResourceInfo.role">
+                                            <option name="Product Owner">Product Owner</option>
+                                            <option name="Solution Owner">Solution Owner</option>
+                                            <option name="Engineer Platform">Engineer Platform</option>
+                                            <option name="Engineer UI">Engineer UI</option>
+                                            <option name="Engineer">Engineer</option>
+                                            <option name="QA Functional Analyst">QA Functional Analyst</option>
+                                            <option name="QA Automation Analyst">QA Automation Analyst</option>
+                                            <option name="QA Analyst">QA Analyst</option>
+                                            <option name="Product Manager">Product Manager</option>
+                                            <option name="Engineering Manager">Engineering Manager</option>
+                                            <option name="UX Designer">UX Designer</option>
+                                            <option name="Data Analyst">Data Analyst</option>
+                                            <option name="Manager">Manager</option>
+                                            <option name="Senior Manager">Senior Manager</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Skills</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Skills" class="form-control" ng-model="vm.editingResourceInfo.skills">
+                                    </div>
+                                    <label class="col-lg-2" style="font-weight: 100; font-size: 9pt">Comma separated</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem === true" ng-click="func.createResource()">Create</button>
+                                        <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem !== true" ng-click="func.updateResource()">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="vm.editingUser === true">
+                <div class="col-lg-7 col-lg-offset-2">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 ng-show="vm.isNewItem === true">New User</h5>
+                            <h5 ng-show="vm.isNewItem !== true">Edit User</h5>
+                            <div class="ibox-tools">
+                                <a ng-click="vm.editingUser = false">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal">
+                                <div class="form-group"><label class="col-lg-2 control-label">ID</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="New User" readonly class="form-control" ng-model="vm.editingUserInfo._id">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Name</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Name" class="form-control" ng-model="vm.editingUserInfo.name">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Picture URL</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Picture URL" class="form-control" ng-model="vm.editingUserInfo.pictureUrl">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label"></label>
+                                    <div class="col-lg-10">
+                                        <img ng-src="{{vm.editingUserInfo.pictureUrl}}" style="max-width: 200px; max-height: 200px;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem === true" ng-click="func.createUser()">Create</button>
+                                        <button class="btn btn-sm btn-white" type="button" ng-show="vm.isNewItem !== true" ng-click="func.updateUser()">Update</button>
                                     </div>
                                 </div>
                             </form>
