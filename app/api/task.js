@@ -12,6 +12,20 @@ module.exports = function(app) {
     });
 
     /**
+     *
+     */
+    app.get('/api/tasks/project/:project_id', function(req, res) {
+
+        Task.find({ 'project': req.params.project_id }, function(err, tasks) {
+
+            if (err) {
+                res.send(err);
+            }
+            res.json(tasks);
+        });
+    });
+
+    /**
      * GET BY ID
      */
     app.get('/api/tasks/:task_id', function(req, res) {
