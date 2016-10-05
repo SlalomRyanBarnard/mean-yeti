@@ -38,7 +38,12 @@ projectSchema.virtual('quadrant.dependencies').get(function () {
  * Project Timeline
  */
 projectSchema.virtual('quadrant.timeline').get(function () {
-    return 100;
+
+    var today = new Date();
+    var totalDays   = Math.round((this.endDate - this.startDate) / (1000*60*60*24));
+    var daysPassed  = Math.round((today - this.startDate) / (1000*60*60*24));
+
+    return this.endDate - this.startDate;
 });
 
 /**
