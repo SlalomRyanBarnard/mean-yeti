@@ -430,11 +430,13 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
         vm.users = [];
 
         vm.currentUser = undefined;
+        vm.selectedProject = undefined;
 
         // Sets up a namespace to put functions
         $scope.func = {
             refreshData: refreshData,
             showSwitchUser: showSwitchUser,
+            selectProject: selectProject,
         };
         var func = $scope.func;
 
@@ -469,6 +471,10 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 
         function showSwitchUser(user) {
             vm.currentUser = user;
+        }
+
+        function selectProject(project) {
+            vm.selectedProject = project;
         }
     }
 }(angular));
@@ -514,7 +520,32 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 					$scope.todos = data; // assign our new list of todos
 				});
 		};
-	});;angular.module('mean-yeti').factory('Api', ['$http', ApiService]);
+	});;angular.module('mean-yeti').filter('findFavorites', function() {
+    return function(projects, favorites) {
+
+        if(favorites === undefined) {
+            return [];
+        }
+
+        return projects.filter(function(project) {
+            if(favorites.indexOf(project._id) !== -1) {
+                return true;
+            }
+            return false;
+        });
+    };
+});
+;angular.module('mean-yeti').filter('firstWord', function() {
+    return function(str) {
+
+        if(str === undefined) {
+            return '';
+        }
+
+        return str.split(' ')[0];
+    };
+});
+;angular.module('mean-yeti').factory('Api', ['$http', ApiService]);
 
 function ApiService($http) {
 

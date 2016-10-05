@@ -55,17 +55,20 @@
                             G
                         </div>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="admin.html"><i class="fa fa-star"></i> <span class="nav-label">Favorites</span></a>
+                        <ul class="nav nav-second-level">
+                            <li ng-repeat="project in vm.projects | findFavorites:vm.currentUser.projects" ng-class="{active: vm.selectedProject === project}">
+                                <a href="" ng-click="func.selectProject(project);"><span ng-bind="project.name"></span></a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="active">
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Projects</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="active"><a href="index.html">BOD Reg 2</a></li>
-                            <li><a href="index.html">TBB User API</a></li>
-                            <li><a href="index.html">Project 3</a></li>
-                            <li><a href="index.html">Project 4</a></li>
-                            <li><a href="index.html">Project 5 </a></li>
+                            <li ng-repeat="project in vm.projects" ng-class="{active: vm.selectedProject === project}">
+                                <a href="" ng-click="func.selectProject(project);"><span ng-bind="project.name"></span></a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -78,11 +81,13 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <!--
             <form role="search" class="navbar-form-custom" action="search_results.html">
                 <div class="form-group">
                     <input type="text" placeholder="Search for a project..." class="form-control" name="top-search" id="top-search">
                 </div>
             </form>
+            -->
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
@@ -101,7 +106,7 @@
             <div class="row border-bottom white-bg dashboard-header">
 
                 <div class="col-md-4">
-                    <h2>Welcome Michael</h2>
+                    <h2>Welcome {{vm.currentUser.name | firstWord}}</h2>
                     <small>You have 5 notifications</small>
                     <ul class="list-group clear-list m-t">
                         <li class="list-group-item fist-item">

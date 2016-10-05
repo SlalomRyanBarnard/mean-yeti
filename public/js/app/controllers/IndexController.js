@@ -17,11 +17,13 @@
         vm.users = [];
 
         vm.currentUser = undefined;
+        vm.selectedProject = undefined;
 
         // Sets up a namespace to put functions
         $scope.func = {
             refreshData: refreshData,
             showSwitchUser: showSwitchUser,
+            selectProject: selectProject,
         };
         var func = $scope.func;
 
@@ -56,6 +58,10 @@
 
         function showSwitchUser(user) {
             vm.currentUser = user;
+        }
+
+        function selectProject(project) {
+            vm.selectedProject = project;
         }
     }
 }(angular));
