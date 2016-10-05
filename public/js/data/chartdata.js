@@ -93,7 +93,7 @@ $(function () {
       data.addRows([
         ['BODReg2', 'BOD Reg 2', 'Yeti',
          new Date(2015, 8, 01), new Date(2015, 10, 30), null, 100, null],
-        ['Project2', 'Project 2', 'Tsunami',
+        ['Project2', 'TBB User API', 'Tsunami',
          new Date(2015, 5, 21), new Date(2015, 8, 20), null, 100, null],
         ['Project3', 'Project 3', 'Mystery Machine',
          new Date(2015, 8, 21), new Date(2015, 11, 20), null, 100, null],
