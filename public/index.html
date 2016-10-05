@@ -179,23 +179,20 @@
                                                         <div class="col-lg-5">
                                                             <dl class="dl-horizontal">
 
-                                                                <dt>Delivery Lead:</dt> <dd>Craig McRae</dd>
-                                                                <dt>System(s):</dt> <dd><a href="#" class="text-navy"> ByDesign, EBS</a> </dd>
+                                                                <dt>Delivery Lead:</dt> <dd ng-repeat="resource in vm.resources | filter:{_id:vm.selectedProject.deliveryLead}"><span ng-bind="resource.name"></span></dd>
+                                                                <dt>System(s):</dt> <dd><a href="#" class="text-navy" ng-bind="vm.selectedProject.systems.join(', ')"></a> </dd>
                                                                 
                                                             </dl>
                                                         </div>
                                                         <div class="col-lg-7" id="cluster_info">
                                                             <dl class="dl-horizontal" >
 
-                                                                <dt>Start Date:</dt> <dd> 8/1/2016</dd>
-                                                                <dt>End Date:</dt> <dd>  10/30/2016 </dd>
+                                                                <dt>Start Date:</dt> <dd ng-bind="vm.selectedProject.startDate | date:'M/dd/yyyy'"></dd>
+                                                                <dt>End Date:</dt> <dd ng-bind="vm.selectedProject.endDate | date:'M/dd/yyyy'"></dd>
                                                                 <dt>Team:</dt>
-                                                                <dd>Team Yeti</dd>
+                                                                <dd ng-repeat="team in vm.teams | filter:{_id:vm.selectedProject.team}">{{team.name}}</dd>
                                                                 <dd class="project-people">
-                                                                <a href=""><img alt="image" class="img-circle" src="img/a3.jpg"></a>
-                                                                <a href=""><img alt="image" class="img-circle" src="img/a1.jpg"></a>
-                                                                <a href=""><img alt="image" class="img-circle" src="img/a2.jpg"></a>
-                                                                <a href=""><img alt="image" class="img-circle" src="img/a4.jpg"></a>
+                                                                    <a href="" ng-repeat="resource in vm.resources | findTeamMembers:vm.teams:vm.selectedProject.team"><img alt="image" class="img-circle" ng-src="{{resource.pictureUrl}}"></a>
                                                                 </dd>
                                                             </dl>
                                                         </div>
@@ -208,7 +205,7 @@
                                                                     <div class="progress progress-striped active m-b-sm">
                                                                         <div style="width: 80%;" class="progress-bar"></div>
                                                                     </div>
-                                                                    <small>Project completion <strong>80%</strong>.</small>
+                                                                    <small>Project completion <strong>TODO%</strong>.</small>
                                                                 </dd>
                                                             </dl>
                                                         </div>
@@ -216,7 +213,7 @@
                                                             <div class="ibox float-e-margins">
                                                                 <div class="ibox-content">
                                                                     <div>
-                                                                        <canvas id="project1ActivityChart"></canvas>
+                                                                        <canvas id="ActivityChartProjectDetails"></canvas>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -551,7 +548,9 @@
                                             <p class="small" ng-bind="vm.selectedProject.description">
                                             </p>
                                             <p class="small font-bold">
-                                                <span><i class="fa fa-circle text-warning"></i> High priority</span>
+                                                <span ng-show="vm.selectedProject.priority === 'High'"><i class="fa fa-circle text-danger"></i> High priority</span>
+                                                <span ng-show="vm.selectedProject.priority === 'Medium'"><i class="fa fa-circle text-warning"></i> Medium priority</span>
+                                                <span ng-show="vm.selectedProject.priority === 'Low'"><i class="fa fa-circle text-success"></i> Low priority</span>
                                             </p>
                                             <h5>Project tags</h5>
                                             <ul class="tag-list" style="padding: 0">

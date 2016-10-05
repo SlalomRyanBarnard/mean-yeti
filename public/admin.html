@@ -342,6 +342,11 @@
                                         <input type="text" placeholder="Description" class="form-control" ng-model="vm.editingProjectInfo.description">
                                     </div>
                                 </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Priority</label>
+                                    <div class="col-lg-10">
+                                        <select ng-model="vm.editingProjectInfo.priority" ng-options="o as o for o in vm.priorities"></select>
+                                    </div>
+                                </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Start Date</label>
                                     <div class="col-lg-10">
                                         <input type="date" placeholder="Start Date" class="form-control" ng-model="vm.editingProjectInfo.startDate">
@@ -350,6 +355,11 @@
                                 <div class="form-group"><label class="col-lg-2 control-label">End Date</label>
                                     <div class="col-lg-10">
                                         <input type="date" placeholder="End Date" class="form-control" ng-model="vm.editingProjectInfo.endDate">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Delivery Lead</label>
+                                    <div class="col-lg-10">
+                                        <select ng-model="vm.editingProjectInfo.deliveryLead" ng-options="resource._id as resource.name for resource in vm.resources"></select>
                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Team</label>
@@ -539,6 +549,12 @@
                                 <div class="form-group"><label class="col-lg-2 control-label">Name</label>
                                     <div class="col-lg-10">
                                         <input type="text" placeholder="Name" class="form-control" ng-model="vm.editingResourceInfo.name">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Picture</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="Picture" class="form-control" ng-model="vm.editingResourceInfo.pictureUrl">
+                                        <img ng-src="{{vm.editingResourceInfo.pictureUrl}}">
                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Team</label>

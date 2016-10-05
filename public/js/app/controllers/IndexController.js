@@ -68,8 +68,11 @@
 
         function selectProject(project) {
             vm.selectedProject = project;
+            vm.selectedProject.startDate = new Date(vm.selectedProject.startDate);
+            vm.selectedProject.endDate = new Date(vm.selectedProject.endDate);
 
             $timeout(function() {
+                drawActivityChart();
                 $('html, body').animate({
                     scrollTop: $("#projectDetails").offset().top
                 }, 500);
@@ -148,6 +151,27 @@
                 var ctx1 = document.getElementById("statusChart" + project._id).getContext("2d");
                 new Chart(ctx1, {type: 'radar', data: radarDataChart, options:radarOptions});
             });
+        }
+        function drawActivityChart() {
+            var radarDataChart1 = {
+                labels: ["Dependencies", "Timeline", "Tasks", "Complexity"],
+                datasets: [
+                    {
+                        label: "",
+                        backgroundColor: "rgba(26,179,128,0.2)",
+                        borderColor: "rgba(23,152,126,1)",
+                        data: [20, 60, 90, 10]
+                    },
+                ]
+            };
+
+            var radarOptions = {
+                responsive: true,
+                legend: { display: false }
+            };
+
+            var ctx1b = document.getElementById("ActivityChartProjectDetails").getContext("2d");
+            new Chart(ctx1b, {type: 'radar', data: radarDataChart1, options:radarOptions});
         }
     }
 }(angular));

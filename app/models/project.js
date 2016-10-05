@@ -11,7 +11,7 @@ var projectSchema = new Schema({
     team            :{ type: String, ref: 'Team' },
     deliverables    :[String],
     systems         :[String],
-    priority        :[String],
+    priority        :String,
     deliveryLead    :{ type: String, ref: 'Resource' }
 });
 

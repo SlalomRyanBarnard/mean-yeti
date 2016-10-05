@@ -30,6 +30,7 @@
         vm.users = [];
 
         vm.systems = ['BI','BB.com','TBB', 'Kibo', 'ByDesign' ,'SOA', 'OAG', 'LifeRay', 'Analytics'];
+        vm.priorities = ['Low','Medium','High'];
 
         // Sets up a namespace to put functions
         $scope.func = {
@@ -149,7 +150,9 @@
                     tags: [],
                     team: '',
                     deliverables: '',
-                    systems: []
+                    systems: [],
+                    priority: 'Medium',
+                    deliveryLoad: '',
                 };
             } else {
                 if(vm.editingProjectInfo.externalTasks === undefined) {
