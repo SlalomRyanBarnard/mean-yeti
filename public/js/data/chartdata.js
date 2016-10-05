@@ -1,15 +1,15 @@
 $(function () {
-
-    var radarDataChart1 = {
-        labels: ["Dependencies", "Timeline", "Tasks", "Complexity"],
-        datasets: [
-            {
-                label: "",
-                backgroundColor: "rgba(26,179,128,0.2)",
-                borderColor: "rgba(23,152,126,1)",
-                data: [20, 60, 90, 10]
-            },
-        ]
+/*
+  var radarDataChart1 = {
+            labels: ["Dependencies", "Timeline", "Tasks", "Complexity"],
+            datasets: [
+                {
+                    label: "",
+                    backgroundColor: "rgba(26,179,128,0.2)",
+                    borderColor: "rgba(23,152,126,1)",
+                    data: [20, 60, 90, 10]
+                },
+            ]
     };
 
     var radarDataChart2 = {
@@ -70,7 +70,7 @@ $(function () {
     var ctx4 = document.getElementById("project4StatusChart").getContext("2d");
     new Chart(ctx4, {type: 'radar', data: radarDataChart4, options:radarOptions});
 
-
+*/
     google.charts.load('current', {'packages':['gantt']});
     //google.charts.setOnLoadCallback(drawChart);
 
