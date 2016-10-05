@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
-module.exports = mongoose.model('Task', {
+var taskSchema = new Schema({
     name            :String,
     isComplete      :Boolean,
     project         :String,
@@ -9,3 +10,5 @@ module.exports = mongoose.model('Task', {
     startDate       :Date,
     endDate         :Date
 });
+
+module.exports = mongoose.model('Task', taskSchema);
