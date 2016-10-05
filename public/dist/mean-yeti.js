@@ -413,7 +413,6 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 }(angular));
 ;(function(angular) {
 
-    'use strict';
 
     angular.module('mean-yeti').controller('index.controller', ['$scope', 'Api', IndexController]);
 
@@ -461,6 +460,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 
                                 if(vm.currentUser === undefined) {
                                     vm.currentUser = vm.users[0];
+                                    drawGanttChart();
                                 }
                             });
                         });
@@ -475,6 +475,52 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 
         function selectProject(project) {
             vm.selectedProject = project;
+
+            drawChart();
+        }
+
+        function drawGanttChart() {
+
+            var ganttRows = [];
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Task ID');
+            data.addColumn('string', 'Task Name');
+            data.addColumn('string', 'Resource');
+            data.addColumn('date', 'Start Date');
+            data.addColumn('date', 'End Date');
+            data.addColumn('number', 'Duration');
+            data.addColumn('number', 'Percent Complete');
+            data.addColumn('string', 'Dependencies');
+
+            vm.projects.forEach(function(project) {
+
+                // TODO: Get this value from the backend
+                var percentComplete = 0;
+
+                var teamName = '(none)';
+                vm.teams.forEach(function(team) {
+                   if(team._id === project.team) {
+                       teamName = team.name;
+                   }
+                });
+
+                ganttRows.push([
+                    project._id, project.name, teamName, new Date(project.startDate), new Date(project.endDate), null, percentComplete, null
+                ]);
+            });
+            data.addRows(ganttRows);
+
+            var options = {
+                height: 350,
+                gantt: {
+                    trackHeight: 30
+                }
+            };
+
+            var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
         }
     }
 }(angular));
