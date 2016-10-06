@@ -3,8 +3,26 @@ var Task = require('../models/task');
 
 var crud    = require('./crud');
 
-function getPercentComplete() {
-    return 66;
+/**
+ *
+ * @returns {number}
+ */
+function getPercentComplete(tasks, externalTasks) {
+    var totalTasks = tasks.length + externalTasks.length;
+
+    if (totalTasks === 0){
+        return 100;
+    }
+
+    var completedTasks = tasks.filter(function(t) {
+        return t.isComplete;
+    }).length;
+
+    var completedExternalTasks = externalTasks.filter(function(t) {
+        return t.isComplete;
+    }).length;
+
+    return (completedExternalTasks + completedTasks) / totalTasks * 100;
 }
 
 /**
@@ -36,8 +54,19 @@ function getTimeline(project) {
 /**
  *
  */
-function getDependencies(project) {
-    return 50;
+function getDependencies(externalTasks) {
+
+    var totalTasks = externalTasks.length;
+
+    if (totalTasks === 0) {
+        return 0;
+    }
+
+    var completedTasks = externalTasks.filter(function(t) {
+        return t.isComplete;
+    }).length;
+
+    return 100 - ((completedTasks / totalTasks) * 100);
 };
 
 /**
@@ -54,7 +83,18 @@ function getComplexity(project) {
  * @param tasks
  */
 function getTasks(tasks) {
-    return 75;
+
+    var totalTasks = tasks.length;
+
+    if (totalTasks === 0) {
+        return 100;
+    }
+
+    var completedTasks = tasks.filter(function(t) {
+        return t.isComplete;
+    }).length;
+
+    return (completedTasks / totalTasks) * 100;
 };
 
 module.exports = function(app) {
@@ -72,29 +112,31 @@ module.exports = function(app) {
      */
     app.get('/api/projects/:project_id/details', function (req, res) {
 
-        Project.findOne({ '_id' : req.params.project_id }, function (err, project) {
-
-            if (err) {
-                res.send(err);
-            }
-            Task.find({ 'project' : req.params.project_id}, function (err, tasks) {
-                console.log('finding tasks');
+        Project.findOne({ '_id' : req.params.project_id }).populate('externalTasks').exec(
+            function (err, project) {
 
                 if (err) {
                     res.send(err);
                 }
-                var quadrants = {
-                    complexity: getComplexity(project),
-                    tasks: getTasks(),
-                    dependencies: getDependencies(),
-                    timeline: getTimeline(project),
-                    percentComplete: getPercentComplete()
-                };
+                Task.find({ 'project' : req.params.project_id}, function (err, tasks) {
+                    console.log('finding tasks');
 
-                res.json(quadrants);
-            });
-        });
+                    if (err) {
+                        res.send(err);
+                    }
+                    var quadrants = {
+                        complexity: getComplexity(project),
+                        tasks: getTasks(tasks),
+                        dependencies: getDependencies(project.externalTasks),
+                        timeline: getTimeline(project),
+                        percentComplete: getPercentComplete(tasks, project.externalTasks)
+                    };
 
+                    res.json(quadrants);
+                });
+            }
+
+        );
     });
 
     /**
