@@ -314,6 +314,11 @@
                                         <input type="text" placeholder="Description" class="form-control" ng-model="vm.editingProjectInfo.description">
                                     </div>
                                 </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">JIRA ID</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="ex: BBSL-224" class="form-control" ng-model="vm.editingProjectInfo.jiraTicketId">
+                                    </div>
+                                </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Priority</label>
                                     <div class="col-lg-10">
                                         <select ng-model="vm.editingProjectInfo.priority" ng-options="o as o for o in vm.priorities"></select>

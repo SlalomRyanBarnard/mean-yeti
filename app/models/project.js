@@ -4,6 +4,7 @@ var Schema   = mongoose.Schema;
 var projectSchema = new Schema({
     name            :String,
     description     :String,
+    jiraTicketId    :String,
     startDate       :Date,
     endDate         :Date,
     externalTasks   :[{type: String, ref: 'Task' }],
