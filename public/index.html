@@ -398,9 +398,10 @@
                                                                             </td>
                                                                             <td ng-bind="task.name">
                                                                             </td>
-                                                                            <td>{{task}}</td>
-                                                                            <td ng-repeat="resource in vm.resources | worksOnTask:task._id">
+                                                                            <td>
+                                                                            <div ng-repeat="resource in vm.resources | worksOnTask:task._id">
                                                                                 {{resource.name}}
+                                                                            </div>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>

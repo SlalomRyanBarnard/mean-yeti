@@ -61,6 +61,7 @@
             updateResource: updateResource,
             updateTeamAfterModifyingResource: updateTeamAfterModifyingResource,
             toggleSelectionOfTeamForResource: toggleSelectionOfTeamForResource,
+            toggleSelectionOfTaskForResource: toggleSelectionOfTaskForResource,
 
             editUser: editUser,
             deleteUser: deleteUser,
@@ -359,6 +360,19 @@
             // is newly selected
             else {
                 vm.selectedTeamsForResource.push(id);
+            }
+        }
+        function toggleSelectionOfTaskForResource(id) {
+            var idx = vm.editingResourceInfo.tasks.indexOf(id);
+
+            // is currently selected
+            if (idx > -1) {
+                vm.editingResourceInfo.tasks.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                vm.editingResourceInfo.tasks.push(id);
             }
         }
 

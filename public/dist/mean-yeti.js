@@ -65,6 +65,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             updateResource: updateResource,
             updateTeamAfterModifyingResource: updateTeamAfterModifyingResource,
             toggleSelectionOfTeamForResource: toggleSelectionOfTeamForResource,
+            toggleSelectionOfTaskForResource: toggleSelectionOfTaskForResource,
 
             editUser: editUser,
             deleteUser: deleteUser,
@@ -363,6 +364,19 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             // is newly selected
             else {
                 vm.selectedTeamsForResource.push(id);
+            }
+        }
+        function toggleSelectionOfTaskForResource(id) {
+            var idx = vm.editingResourceInfo.tasks.indexOf(id);
+
+            // is currently selected
+            if (idx > -1) {
+                vm.editingResourceInfo.tasks.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                vm.editingResourceInfo.tasks.push(id);
             }
         }
 
@@ -740,10 +754,6 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 ;angular.module('mean-yeti').filter('getExternalTasks', function() {
     return function(tasks, project) {
 
-        console.log('aa');
-        console.log(tasks);
-        console.log(project);
-        console.log('bb');
         if(tasks === undefined) {
             return [];
         }
@@ -757,12 +767,11 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             if(project.externalTasks.indexOf(task._id) === -1) {
                 return false;
             }
-            console.log('found task');
             return true;
         });
     };
 });
-;angular.module('mean-yeti').filter('getExternalTasks', function() {
+;angular.module('mean-yeti').filter('worksOnTask', function() {
     return function(resources, taskId) {
 
         if(resources === undefined) {
@@ -773,8 +782,9 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             return [];
         }
 
+        console.log(taskId);
         return resources.filter(function(resource) {
-
+console.log(resource);
             if(resource.tasks === undefined) return false;
 
             if(resource.tasks.indexOf(taskId) === -1) {
