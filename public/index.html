@@ -313,8 +313,11 @@
 
 
                                                                     <div class="vertical-timeline-block" ng-repeat="task in vm.tasks | filter:{project:vm.selectedProject._id}">
-                                                                        <div class="vertical-timeline-icon yellow-bg">
+                                                                        <div class="vertical-timeline-icon yellow-bg" ng-hide="task.isComplete === true">
                                                                             <i class="fa fa-exclamation"></i>
+                                                                        </div>
+                                                                        <div class="vertical-timeline-icon lazur-bg" ng-show="task.isComplete === true">
+                                                                            <i class="fa fa-check"></i>
                                                                         </div>
 
                                                                         <div class="vertical-timeline-content">
