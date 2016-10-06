@@ -465,6 +465,13 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                             api.getAll('users').then(function(result) {
                                 vm.users = result.data;
 
+                                vm.projects.forEach(function(project) {
+                                    api.getProjectDetails(project._id).then(function(result) {
+                                       project.details = result.data;
+                                    });
+                                });
+
+
                                 if(vm.currentUser === undefined) {
                                     vm.currentUser = vm.users[0];
 
@@ -472,7 +479,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                                     $timeout(function() {
                                         drawGanttChart();
                                         drawWatchedProjectsCharts();
-                                    }, 100);
+                                    }, 1000);
                                 }
                             });
                         });
@@ -492,7 +499,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             vm.selectedProject.endDate = new Date(vm.selectedProject.endDate);
 
             $timeout(function() {
-                drawActivityChart();
+                drawActivityChart(project);
                 $('html, body').animate({
                     scrollTop: $("#projectDetails").offset().top
                 }, 500);
@@ -557,6 +564,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 
             sortedProjects.forEach(function(project) {
 
+                console.log(project);
                 // TODO: Get this value from the backend
                 var percentComplete = 0;
 
@@ -597,7 +605,8 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                             label: "",
                             backgroundColor: "rgba(26,179,128,0.2)",
                             borderColor: "rgba(23,152,126,1)",
-                            data: [20, 60, 90, 10]
+                            data: [project.details.dependencies, project.details.timeline, project.details.tasks, project.details.complexity]
+                           // data: [20, 60, 90, 10]
                         },
                     ]
                 };
@@ -610,7 +619,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 new Chart(ctx1, {type: 'radar', data: radarDataChart, options:radarOptions});
             });
         }
-        function drawActivityChart() {
+        function drawActivityChart(project) {
             var radarDataChart1 = {
                 labels: ["Dependencies", "Timeline", "Tasks", "Complexity"],
                 datasets: [
@@ -618,7 +627,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                         label: "",
                         backgroundColor: "rgba(26,179,128,0.2)",
                         borderColor: "rgba(23,152,126,1)",
-                        data: [20, 60, 90, 10]
+                        data: [project.details.dependencies, project.details.timeline, project.details.tasks, project.details.complexity]
                     },
                 ]
             };
@@ -750,6 +759,7 @@ function ApiService($http) {
         create: create,
         remove: remove,
         update: update,
+        getProjectDetails: getProjectDetails,
         endpoint: endpoint
     };
 
@@ -764,6 +774,14 @@ function ApiService($http) {
         return $http({
             method: 'GET',
             url: apiPrefix + endpoint,
+            cache: false
+        });
+    };
+
+    function getProjectDetails(projectId) {
+        return $http({
+            method: 'GET',
+            url: apiPrefix + 'projects/' + projectId + '/details',
             cache: false
         });
     };

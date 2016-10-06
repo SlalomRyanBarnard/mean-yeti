@@ -19,6 +19,7 @@ function ApiService($http) {
         create: create,
         remove: remove,
         update: update,
+        getProjectDetails: getProjectDetails,
         endpoint: endpoint
     };
 
@@ -33,6 +34,14 @@ function ApiService($http) {
         return $http({
             method: 'GET',
             url: apiPrefix + endpoint,
+            cache: false
+        });
+    };
+
+    function getProjectDetails(projectId) {
+        return $http({
+            method: 'GET',
+            url: apiPrefix + 'projects/' + projectId + '/details',
             cache: false
         });
     };
