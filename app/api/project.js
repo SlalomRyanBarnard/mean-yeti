@@ -3,6 +3,10 @@ var Task = require('../models/task');
 
 var crud    = require('./crud');
 
+function getPercentComplete() {
+    return 66;
+}
+
 /**
  *
  * @param startDate
@@ -83,7 +87,8 @@ module.exports = function(app) {
                     complexity: getComplexity(project),
                     tasks: getTasks(),
                     dependencies: getDependencies(),
-                    timeline: getTimeline(project)
+                    timeline: getTimeline(project),
+                    percentComplete: getPercentComplete()
                 };
 
                 res.json(quadrants);
