@@ -260,58 +260,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
-
-
-
-
-
-
-
-
-                                                            <div class="col-lg-4">
-                                                                <div class="ibox">
-                                                                    <div class="ibox-content">
-                                                                        <h5>TBB User API</h5>
-                                                                        <h2>100%</h2>
-                                                                        <div class="progress progress-mini">
-                                                                            <div style="width: 100%;" class="progress-bar"></div>
-                                                                        </div>
-
-                                                                        <div class="m-t-sm small">Complete. In PROD.</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-lg-4">
-                                                                <div class="ibox">
-                                                                    <div class="ibox-content">
-                                                                        <h5>TBB Welcome Email</h5>
-                                                                        <h2>90%</h2>
-                                                                        <div class="progress progress-mini">
-                                                                            <div style="width: 90%;" class="progress-bar"></div>
-                                                                        </div>
-
-                                                                        <div class="m-t-sm small">Awaiting deployment</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-lg-4">
-                                                                <div class="ibox">
-                                                                    <div class="ibox-content">
-                                                                        <h5>BI DB Optimization</h5>
-                                                                        <h2>100%</h2>
-                                                                        <div class="progress progress-mini">
-                                                                            <div style="width: 100%;" class="progress-bar"></div>
-                                                                        </div>
-
-                                                                        <div class="m-t-sm small">Complete. In PROD.</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
                                                         <div class="tab-pane" id="tab-2">
 
@@ -352,38 +300,39 @@
 
                                                                         <div class="vertical-timeline-content">
                                                                             <h2>Project Complete</h2>
-                                                                            <p>It all ends here
-                                                                            </p>
+                                                                            <p></p>
                                                                             <span class="vertical-date">
-                                                                                Monday <br/>
-                                                                                <small>Oct 10</small>
+                                                                                <span ng-bind="vm.selectedProject.endDate | date:'EEEE'"></span>
+                                                                                <br/>
+                                                                                <small ng-bind="vm.selectedProject.endDate | date:'MMM d'"></small>
                                                                             </span>
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="vertical-timeline-block">
-                                                                        <div class="vertical-timeline-icon lazur-bg">
-                                                                            <i class="fa fa-check"></i>
-                                                                        </div>
 
-                                                                        <div class="vertical-timeline-content">
-                                                                            <h2>Task Name</h2>
-                                                                            <p>Task complete</p>
-                                                                            <span class="vertical-date">Monday <br/><small>Sept 14</small></span>
-                                                                        </div>
-                                                                    </div>
 
-                                                                    <div class="vertical-timeline-block">
+
+                                                                    <div class="vertical-timeline-block" ng-repeat="task in vm.tasks | filter:{project:vm.selectedProject._id}">
                                                                         <div class="vertical-timeline-icon yellow-bg">
                                                                             <i class="fa fa-exclamation"></i>
                                                                         </div>
 
                                                                         <div class="vertical-timeline-content">
-                                                                            <h2>Task Name</h2>
-                                                                            <p>Task incomplete</p>
-                                                                            <span class="vertical-date">Monday <br/><small>Sept 14</small></span>
+                                                                            <h2 ng-bind="task.name"></h2>
+                                                                            <p ng-show="task.isComplete === true">Task complete</p>
+                                                                            <p ng-hide="task.isComplete === true">Task incomplete</p>
+                                                                            <span class="vertical-date">
+                                                                                <span ng-bind="task.endDate | date:'EEEE'"></span>
+                                                                                <br/>
+                                                                                <small ng-bind="task.endDate | date:'MMM d'"></small>
+                                                                            </span>
                                                                         </div>
                                                                     </div>
+
+
+
+
+
 
                                                                     <div class="vertical-timeline-block">
                                                                         <div class="vertical-timeline-icon navy-bg">
@@ -392,8 +341,12 @@
 
                                                                         <div class="vertical-timeline-content">
                                                                             <h2>Project Start</h2>
-                                                                            <p>Project Kickofff</p>
-                                                                            <span class="vertical-date">Wednesday <br/><small>Sept 1</small></span>
+                                                                            <p></p>
+                                                                            <span class="vertical-date">
+                                                                                <span ng-bind="vm.selectedProject.startDate | date:'EEEE'"></span>
+                                                                                <br/>
+                                                                                <small ng-bind="vm.selectedProject.startDate | date:'MMM d'"></small>
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                 </div>

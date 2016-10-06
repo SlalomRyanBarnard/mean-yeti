@@ -472,6 +472,14 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 vm.projects = result.data;
                 api.getAll('tasks').then(function(result) {
                     vm.tasks = result.data;
+
+                    console.log(vm.tasks);
+                    vm.tasks = vm.tasks.sort(function(a,b){
+                        return new Date(b.endDate) - new Date(a.endDate);
+                    });
+                    console.log(vm.tasks);
+
+
                     api.getAll('teams').then(function(result) {
                         vm.teams = result.data;
                         api.getAll('resources').then(function(result) {
@@ -782,9 +790,8 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             return [];
         }
 
-        console.log(taskId);
         return resources.filter(function(resource) {
-console.log(resource);
+
             if(resource.tasks === undefined) return false;
 
             if(resource.tasks.indexOf(taskId) === -1) {
