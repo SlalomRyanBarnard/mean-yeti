@@ -445,6 +445,10 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
         vm.resources = [];
         vm.users = [];
 
+        vm.apiCalls = 0;
+
+        vm.notifications = [];
+
         vm.currentUser = undefined;
         vm.selectedProject = undefined;
 
@@ -473,11 +477,9 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 api.getAll('tasks').then(function(result) {
                     vm.tasks = result.data;
 
-                    console.log(vm.tasks);
                     vm.tasks = vm.tasks.sort(function(a,b){
                         return new Date(b.endDate) - new Date(a.endDate);
                     });
-                    console.log(vm.tasks);
 
 
                     api.getAll('teams').then(function(result) {
@@ -488,8 +490,10 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                                 vm.users = result.data;
 
                                 vm.projects.forEach(function(project) {
+                                    vm.apiCalls++;
                                     api.getProjectDetails(project._id).then(function(result) {
                                        project.details = result.data;
+                                        vm.apiCalls--;
                                     });
                                 });
 
@@ -498,16 +502,25 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                                     vm.currentUser = vm.users[0];
 
                                     // Wait for a digest cycle before populating.
-                                    $timeout(function() {
-                                        drawGanttChart();
-                                        drawWatchedProjectsCharts();
-                                    }, 1000);
+                                    $timeout(analyzeData, 1000);
                                 }
                             });
                         });
                     });
                 });
             });
+        }
+
+        function analyzeData() {
+            if(vm.apiCalls > 0) {
+                console.log('not done getting data...try again in a moment.');
+                $timeout(analyzeData, 300);
+                return;
+            }
+
+            generateNotifications();
+            drawGanttChart();
+            drawWatchedProjectsCharts();
         }
 
         function showSwitchUser(user) {
@@ -661,6 +674,90 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             var ctx1b = document.getElementById("ActivityChartProjectDetails").getContext("2d");
             new Chart(ctx1b, {type: 'radar', data: radarDataChart1, options:radarOptions});
         }
+
+        function generateNotifications() {
+
+            var notificationLevelGood = 4;
+            var notificationLevelError = 3;
+            var notificationLevelWarning = 2;
+            var notificationLevelInfo = 1;
+
+            // Find projects that are almost complete.
+            vm.projects.forEach(function(project) {
+
+                var hoursToEnd = (new Date(project.endDate) - new Date()) / (1000 * 60 * 60);
+                if(hoursToEnd >= 0 && hoursToEnd < (24*4)) {
+                    vm.notifications.push({
+                        level: notificationLevelGood,
+                        text: 'Project ' + project.name + ' will end in ' + Math.round(hoursToEnd) + ' hours.'});
+                }
+            })
+
+            // Find projects that are overdue.
+            vm.projects.forEach(function (project) {
+                if((new Date(project.endDate) - new Date()) < 0) {
+                    if(project.details.percentComplete < 100) {
+                        vm.notifications.push({
+                            level: notificationLevelError,
+                            text: 'Project ' + project.name + ' is past due.'});
+                    }
+                }
+            });
+
+            // Find projects with overdue tasks.
+            vm.projects.forEach(function (project) {
+                var projectOverdueTasks = 0;
+                vm.tasks.forEach(function(task) {
+                    if(task.project !== project._id) return;
+
+                    if((new Date(task.endDate) - new Date()) < 0) {
+                        projectOverdueTasks++;
+                    }
+                })
+                if(projectOverdueTasks > 0) {
+                    vm.notifications.push({
+                        level: notificationLevelWarning,
+                        text: 'Project ' + project.name + ' has ' + projectOverdueTasks + ' task' + (projectOverdueTasks > 1 ? 's' : '')  + ' that are past due.'});
+                }
+            });
+
+            // Find resources who are double-booked.
+            vm.resources.forEach(function(resource) {
+
+                var overbooked = false;
+
+                vm.tasks.forEach(function(task) {
+                    if(resource.tasks.indexOf(task._id) === -1) return;
+                    if(task.isComplete === true) return;
+
+                    var checkDate1 = new Date(task.startDate);
+                    var checkDate2 = new Date(task.endDate);
+
+                    // Check it...
+                    vm.tasks.forEach(function(checkTask) {
+                        if(resource.tasks.indexOf(checkTask._id) === -1) return;
+                        if(checkTask.isComplete === true) return;
+                        if(checkTask._id === task._id) return;
+
+                        if(checkDate1 > new Date(checkTask.startDate) && checkDate1 < new Date(checkTask.endDate)) {
+                            overbooked = true;
+                        }
+                        if(checkDate2 > new Date(checkTask.startDate) && checkDate2 < new Date(checkTask.endDate)) {
+                            overbooked = true;
+                        }
+                    });
+                });
+
+                if(overbooked === true) {
+                    vm.notifications.push({level: notificationLevelInfo, text: 'TEAM resource ' + resource.name + ' is over capacity.'});
+                }
+            });
+        }
+
+        function numHoursBetween(d1, d2) {
+            var diff = d1.getTime() - d2.getTime();
+            return diff / (1000 * 60 * 60);
+        };
     }
 }(angular));
 ;angular.module('todoController', [])

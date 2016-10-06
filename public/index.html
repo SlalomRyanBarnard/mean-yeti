@@ -104,22 +104,16 @@
 
                 <div class="col-md-4">
                     <h2>Welcome {{vm.currentUser.name | firstWord}}</h2>
-                    <small>You have 5 notifications</small>
+                    <small>You have {{vm.notifications.length}} notification{{vm.notifications.length === 1 ? '' : 's'}}</small>
                     <ul class="list-group clear-list m-t">
-                        <li class="list-group-item fist-item">
-                            <span class="label label-default">1</span> BOD Reg 2 will end in 48 hours.
-                        </li>
-                        <li class="list-group-item">
-                            <span class="label label-warning">2</span> Project 3 is now past due.
-                        </li>
-                        <li class="list-group-item">
-                            <span class="label label-danger">3</span> Tsunami resouce David Overbit is over capacity.
-                        </li>
-                        <li class="list-group-item">
-                            <span class="label label-warning">4</span> Dependency threshold for Project 33 has been reached.
-                        </li>
-                        <li class="list-group-item">
-                            <span class="label label-primary">5</span> Project 9's timeline has been extended by 2 weeks.
+                        <li ng-repeat="notification in vm.notifications" ng-class="{'list-group-item': true, 'fist-item': $index === 0}">
+                            <span ng-class="{
+                            'label': true,
+                            'label-default': notification.level === 1,
+                            'label-warning': notification.level === 2,
+                            'label-danger': notification.level === 3,
+                            'label-primary': notification.level === 4
+                            }">{{($index + 1)}}</span> {{notification.text}}
                         </li>
                     </ul>
                 </div>
