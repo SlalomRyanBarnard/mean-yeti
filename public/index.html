@@ -188,7 +188,7 @@
                                                             <dl class="dl-horizontal">
 
                                                                 <dt>Delivery Lead:</dt> <dd ng-repeat="resource in vm.resources | filter:{_id:vm.selectedProject.deliveryLead}"><span ng-bind="resource.name"></span></dd>
-                                                                <dt>System(s):</dt> <dd><a href="#" class="text-navy" ng-bind="vm.selectedProject.systems.join(', ')"></a> </dd>
+                                                                <dt>System(s):</dt> <dd><span href="#" class="text-navy" ng-bind="vm.selectedProject.systems.join(', ')"></span> </dd>
                                                                 
                                                             </dl>
                                                         </div>
@@ -367,8 +367,20 @@
                                                                         </div>
 
                                                                         <div class="vertical-timeline-content">
-                                                                            <h2>Task Completed</h2>
-                                                                            <p>Perhaps a task description? Or maybe just a username</p>
+                                                                            <h2>Task Name</h2>
+                                                                            <p>Task complete</p>
+                                                                            <span class="vertical-date">Monday <br/><small>Sept 14</small></span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="vertical-timeline-block">
+                                                                        <div class="vertical-timeline-icon yellow-bg">
+                                                                            <i class="fa fa-exclamation"></i>
+                                                                        </div>
+
+                                                                        <div class="vertical-timeline-content">
+                                                                            <h2>Task Name</h2>
+                                                                            <p>Task incomplete</p>
                                                                             <span class="vertical-date">Monday <br/><small>Sept 14</small></span>
                                                                         </div>
                                                                     </div>
