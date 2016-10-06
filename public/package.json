@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "~0.4.4",
-    "grunt-angular-templates": "^1.0.4",
+    "grunt-angular-templates": "latest",
     "grunt-contrib-concat": "latest",
     "grunt-contrib-copy": "latest",
     "grunt-contrib-cssmin": "latest",
-    "grunt-contrib-sass": "latest",
+    "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-newer": "latest",
-    "grunt-angular-templates": "latest"
+    "grunt-newer": "latest"
   }
 }
