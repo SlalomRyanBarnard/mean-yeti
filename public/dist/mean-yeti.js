@@ -717,7 +717,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 if(projectOverdueTasks > 0) {
                     vm.notifications.push({
                         level: notificationLevelWarning,
-                        text: 'Project ' + project.name + ' has ' + projectOverdueTasks + ' task' + (projectOverdueTasks > 1 ? 's' : '')  + ' that are past due.'});
+                        text: 'Project ' + project.name + ' has ' + projectOverdueTasks + ' task' + (projectOverdueTasks > 1 ? 's' : '')  + ' that ' + (projectOverdueTasks > 1 ? 'are' : 'is')  + ' past due.'});
                 }
             });
 
