@@ -724,6 +724,14 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             // Find resources who are double-booked.
             vm.resources.forEach(function(resource) {
 
+                // Get their team
+                var teamName = '';
+                vm.teams.forEach(function(team) {
+                    if(team.resources.indexOf(resource._id) !== -1) {
+                        teamName = team.name;
+                    }
+                });
+
                 var overbooked = false;
 
                 vm.tasks.forEach(function(task) {
@@ -749,7 +757,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                 });
 
                 if(overbooked === true) {
-                    vm.notifications.push({level: notificationLevelInfo, text: 'TEAM resource ' + resource.name + ' is over capacity.'});
+                    vm.notifications.push({level: notificationLevelInfo, text: teamName + ' resource ' + resource.name + ' is over capacity.'});
                 }
             });
         }
