@@ -49,6 +49,13 @@
                             api.getAll('users').then(function(result) {
                                 vm.users = result.data;
 
+                                vm.projects.forEach(function(project) {
+                                    api.getProjectDetails(project._id).then(function(result) {
+                                       project.details = result.data;
+                                    });
+                                });
+
+
                                 if(vm.currentUser === undefined) {
                                     vm.currentUser = vm.users[0];
 
@@ -56,7 +63,7 @@
                                     $timeout(function() {
                                         drawGanttChart();
                                         drawWatchedProjectsCharts();
-                                    }, 100);
+                                    }, 1000);
                                 }
                             });
                         });
@@ -76,7 +83,7 @@
             vm.selectedProject.endDate = new Date(vm.selectedProject.endDate);
 
             $timeout(function() {
-                drawActivityChart();
+                drawActivityChart(project);
                 $('html, body').animate({
                     scrollTop: $("#projectDetails").offset().top
                 }, 500);
@@ -141,6 +148,7 @@
 
             sortedProjects.forEach(function(project) {
 
+                console.log(project);
                 // TODO: Get this value from the backend
                 var percentComplete = 0;
 
@@ -181,7 +189,8 @@
                             label: "",
                             backgroundColor: "rgba(26,179,128,0.2)",
                             borderColor: "rgba(23,152,126,1)",
-                            data: [20, 60, 90, 10]
+                            data: [project.details.dependencies, project.details.timeline, project.details.tasks, project.details.complexity]
+                           // data: [20, 60, 90, 10]
                         },
                     ]
                 };
@@ -194,7 +203,7 @@
                 new Chart(ctx1, {type: 'radar', data: radarDataChart, options:radarOptions});
             });
         }
-        function drawActivityChart() {
+        function drawActivityChart(project) {
             var radarDataChart1 = {
                 labels: ["Dependencies", "Timeline", "Tasks", "Complexity"],
                 datasets: [
@@ -202,7 +211,7 @@
                         label: "",
                         backgroundColor: "rgba(26,179,128,0.2)",
                         borderColor: "rgba(23,152,126,1)",
-                        data: [20, 60, 90, 10]
+                        data: [project.details.dependencies, project.details.timeline, project.details.tasks, project.details.complexity]
                     },
                 ]
             };
