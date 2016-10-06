@@ -245,7 +245,31 @@
 
                                                         <div class="tab-content">
                                                         <div class="tab-pane active" id="tab-1">
-                                                            
+
+                                                            <div class="col-lg-4" ng-repeat="task in vm.tasks | getExternalTasks:vm.selectedProject">
+                                                                <div class="ibox">
+                                                                    <div class="ibox-content">
+                                                                        <h5 ng-bind="task.name"></h5>
+                                                                        <h2>100%</h2>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 100%;" class="progress-bar"></div>
+                                                                        </div>
+
+                                                                        <div ng-show="task.isComplete === true" class="m-t-sm small"><i class="fa fa-check-circle"></i> Complete</div>
+                                                                        <div ng-hide="task.isComplete === true" class="m-t-sm small"><i class="fa fa-circle-o"></i> Active</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
+
+
+
+
                                                             <div class="col-lg-4">
                                                                 <div class="ibox">
                                                                     <div class="ibox-content">
@@ -419,17 +443,11 @@
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
-
                                                                 </div>
                                                             </div>
-
-                                                            
                                                         </div>
-
                                                         </div>
-
                                                         </div>
-
                                                         </div>
                                                         </div>
                                                     </div>
