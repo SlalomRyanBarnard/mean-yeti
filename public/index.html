@@ -213,7 +213,7 @@
                                                                     <div class="progress progress-striped active m-b-sm">
                                                                         <div ng-style="{'width':vm.selectedProject.details.percentComplete+'%'}" class="progress-bar"></div>
                                                                     </div>
-                                                                    <small>Project completion <strong>{{vm.selectedProject.details.percentComplete}}%</strong>.</small>
+                                                                    <small>Project completion <strong>{{vm.selectedProject.details.percentComplete | number:0}}%</strong>.</small>
                                                                 </dd>
                                                             </dl>
                                                         </div>
