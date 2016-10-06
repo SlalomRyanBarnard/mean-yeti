@@ -250,9 +250,9 @@
                                                                 <div class="ibox">
                                                                     <div class="ibox-content">
                                                                         <h5 ng-bind="task.name"></h5>
-                                                                        <h2>100%</h2>
+                                                                        <h2><span ng-bind="task.timeline | number:0"></span>%</h2>
                                                                         <div class="progress progress-mini">
-                                                                            <div style="width: 100%;" class="progress-bar"></div>
+                                                                            <div ng-style="{'width': task.timeline + '%'}" class="progress-bar"></div>
                                                                         </div>
 
                                                                         <div ng-show="task.isComplete === true" class="m-t-sm small"><i class="fa fa-check-circle"></i> Complete</div>
