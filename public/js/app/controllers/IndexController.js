@@ -23,6 +23,8 @@
             refreshData: refreshData,
             showSwitchUser: showSwitchUser,
             selectProject: selectProject,
+            removeProjectFavorite: removeProjectFavorite,
+            makeProjectFavorite: makeProjectFavorite,
         };
         var func = $scope.func;
 
@@ -77,6 +79,39 @@
                     scrollTop: $("#projectDetails").offset().top
                 }, 500);
             }, 10);
+        }
+
+        function makeProjectFavorite(id) {
+            vm.currentUser.projects.push(id);
+            api.update(api.endpoint.user, vm.currentUser._id, vm.currentUser).then(function(result) {
+                api.getAll('resources').then(function(result1) {
+                    vm.resources = result1.data;
+                    vm.currentUser = result.data;
+
+                    // Wait for a digest cycle before populating.
+                    $timeout(function() {
+                        drawGanttChart();
+                        drawWatchedProjectsCharts();
+                    }, 100);
+                });
+            });
+        }
+
+        function removeProjectFavorite(id) {
+            var idx = vm.currentUser.projects.indexOf(id);
+            vm.currentUser.projects.splice(idx, 1);
+            api.update(api.endpoint.user, vm.currentUser._id, vm.currentUser).then(function(result) {
+                api.getAll('resources').then(function(result1) {
+                    vm.resources = result1.data;
+                    vm.currentUser = result.data;
+
+                    // Wait for a digest cycle before populating.
+                    $timeout(function() {
+                        drawGanttChart();
+                        drawWatchedProjectsCharts();
+                    }, 100);
+                });
+            });
         }
 
         function drawGanttChart() {

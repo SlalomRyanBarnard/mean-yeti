@@ -164,14 +164,22 @@
                                     <div class="col-lg-9">
                                         <div class="wrapper wrapper-content animated fadeInUp">
                                             <div class="ibox">
+                                                <div class="ibox-title">
+                                                    <a href="" class="pull-right" ng-click="func.makeProjectFavorite(vm.selectedProject._id)" ng-show="vm.currentUser.projects.indexOf(vm.selectedProject._id) === -1">
+                                                        <i class="fa fa-star-o fa-2x" style="color: goldenrod"></i>
+                                                    </a>
+                                                    <a href="" class="pull-right" ng-click="func.removeProjectFavorite(vm.selectedProject._id)" ng-show="vm.currentUser.projects.indexOf(vm.selectedProject._id) !== -1">
+                                                        <i class="fa fa-star fa-2x" style="color: goldenrod"></i>
+                                                    </a>
+                                                    <div class="m-b-md">
+                                                        <h2 ng-bind="vm.selectedProject.name"></h2>
+                                                    </div>
+                                                </div>
                                                 <div class="ibox-content">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <div class="m-b-md">
-                                                                <h2 ng-bind="vm.selectedProject.name"></h2>
-                                                            </div>
                                                             <dl class="dl-horizontal">
-                                                                <dt>Status:</dt> <dd><span class="label label-primary">Active</span></dd>
+                                                                <dt>Status:</dt> <dd><span class="label label-primary">TODO (Active / Complete)</span></dd>
                                                             </dl>
                                                         </div>
                                                     </div>
