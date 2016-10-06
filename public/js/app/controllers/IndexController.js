@@ -148,9 +148,8 @@
 
             sortedProjects.forEach(function(project) {
 
-                console.log(project);
                 // TODO: Get this value from the backend
-                var percentComplete = 0;
+                var percentComplete = project.details.percentComplete;
 
                 var teamName = '(none)';
                 vm.teams.forEach(function(team) {

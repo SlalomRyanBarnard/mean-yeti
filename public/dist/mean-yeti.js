@@ -564,9 +564,8 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 
             sortedProjects.forEach(function(project) {
 
-                console.log(project);
                 // TODO: Get this value from the backend
-                var percentComplete = 0;
+                var percentComplete = project.details.percentComplete;
 
                 var teamName = '(none)';
                 vm.teams.forEach(function(team) {
@@ -736,6 +735,53 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
         }
 
         return str.split(' ')[0];
+    };
+});
+;angular.module('mean-yeti').filter('getExternalTasks', function() {
+    return function(tasks, project) {
+
+        console.log('aa');
+        console.log(tasks);
+        console.log(project);
+        console.log('bb');
+        if(tasks === undefined) {
+            return [];
+        }
+
+        if(project === undefined) {
+            return [];
+        }
+
+        return tasks.filter(function(task) {
+
+            if(project.externalTasks.indexOf(task._id) === -1) {
+                return false;
+            }
+            console.log('found task');
+            return true;
+        });
+    };
+});
+;angular.module('mean-yeti').filter('getExternalTasks', function() {
+    return function(resources, taskId) {
+
+        if(resources === undefined) {
+            return [];
+        }
+
+        if(taskId === undefined) {
+            return [];
+        }
+
+        return resources.filter(function(resource) {
+
+            if(resource.tasks === undefined) return false;
+
+            if(resource.tasks.indexOf(taskId) === -1) {
+                return false;
+            }
+            return true;
+        });
     };
 });
 ;angular.module('mean-yeti').factory('Api', ['$http', ApiService]);

@@ -392,26 +392,15 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                        <tr>
+                                                                        <tr ng-repeat="task in vm.tasks | getExternalTasks:vm.selectedProject">
                                                                             <td>
                                                                                 <span class="label label-primary"><i class="fa fa-check-circle"></i> Completed</span>
                                                                             </td>
-                                                                            <td>
-                                                                               Create project in webapp
+                                                                            <td ng-bind="task.name">
                                                                             </td>
-                                                                            <td>
-                                                                               James
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <span class="label label-primary"><i class="fa fa-circle-o"></i> Incomplete</span>
-                                                                            </td>
-                                                                            <td>
-                                                                               Create colors in webapp
-                                                                            </td>
-                                                                            <td>
-                                                                               Barry
+                                                                            <td>{{task}}</td>
+                                                                            <td ng-repeat="resource in vm.resources | worksOnTask:task._id">
+                                                                                {{resource.name}}
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
