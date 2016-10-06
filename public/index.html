@@ -188,7 +188,7 @@
                                                             <dl class="dl-horizontal">
 
                                                                 <dt>Delivery Lead:</dt> <dd ng-repeat="resource in vm.resources | filter:{_id:vm.selectedProject.deliveryLead}"><span ng-bind="resource.name"></span></dd>
-                                                                <dt>System(s):</dt> <dd><a href="#" class="text-navy" ng-bind="vm.selectedProject.systems.join(', ')"></a> </dd>
+                                                                <dt>System(s):</dt> <dd><span href="#" class="text-navy" ng-bind="vm.selectedProject.systems.join(', ')"></span> </dd>
                                                                 
                                                             </dl>
                                                         </div>
