@@ -330,6 +330,8 @@
                     vm.notifications.push({level: notificationLevelInfo, text: teamName + ' resource ' + resource.name + ' is over capacity.'});
                 }
             });
+
+            vm.notifications = vm.notifications.slice(0, 10);
         }
 
         function numHoursBetween(d1, d2) {
