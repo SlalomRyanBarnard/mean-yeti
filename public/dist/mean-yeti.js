@@ -441,6 +441,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             selectProject: selectProject,
             removeProjectFavorite: removeProjectFavorite,
             makeProjectFavorite: makeProjectFavorite,
+            inPast: inPast,
         };
         var func = $scope.func;
 
@@ -528,6 +529,11 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                     }, 100);
                 });
             });
+        }
+
+        function inPast(checkDate){
+            var now = new Date();
+            return checkDate < now ? true : false;
         }
 
         function drawGanttChart() {
