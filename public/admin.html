@@ -529,6 +529,19 @@
                                         <img ng-src="{{vm.editingResourceInfo.pictureUrl}}">
                                     </div>
                                 </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">Tasks</label>
+                                    <div class="col-lg-10">
+                                        <div ng-repeat="task in vm.tasks">
+                                            <input
+                                                    type="checkbox"
+                                                    name="selectedTasks[]"
+                                                    value="{{task._id}}"
+                                                    ng-checked="vm.editingResourceInfo.tasks.indexOf(task._id) > -1"
+                                                    ng-click="func.toggleSelectionOfTaskForResource(task._id)"
+                                            > {{task.name}}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Team</label>
                                     <div class="col-lg-10">
                                         <div ng-repeat="team in vm.teams">

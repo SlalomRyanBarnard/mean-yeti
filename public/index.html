@@ -406,13 +406,15 @@
                                                                         <tbody>
                                                                         <tr ng-repeat="task in vm.tasks | getExternalTasks:vm.selectedProject">
                                                                             <td>
-                                                                                <span class="label label-primary"><i class="fa fa-check-circle"></i> Completed</span>
+                                                                                <span ng-show="task.isComplete === true" class="label label-primary"><i class="fa fa-check-circle"></i> Completed</span>
+                                                                                <span ng-hide="task.isComplete === true" class="label label-warning"><i class="fa fa-check-circle"></i> Active</span>
                                                                             </td>
                                                                             <td ng-bind="task.name">
                                                                             </td>
-                                                                            <td>{{task}}</td>
-                                                                            <td ng-repeat="resource in vm.resources | worksOnTask:task._id">
+                                                                            <td>
+                                                                            <div ng-repeat="resource in vm.resources | worksOnTask:task._id">
                                                                                 {{resource.name}}
+                                                                            </div>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
