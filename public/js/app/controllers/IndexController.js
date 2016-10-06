@@ -26,6 +26,7 @@
             removeProjectFavorite: removeProjectFavorite,
             makeProjectFavorite: makeProjectFavorite,
             inPast: inPast,
+
         };
         var func = $scope.func;
 

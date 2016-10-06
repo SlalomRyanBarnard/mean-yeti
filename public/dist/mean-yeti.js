@@ -442,6 +442,7 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
             removeProjectFavorite: removeProjectFavorite,
             makeProjectFavorite: makeProjectFavorite,
             inPast: inPast,
+
         };
         var func = $scope.func;
 

@@ -21,6 +21,10 @@ module.exports = function(grunt) {
                 ],
                 tasks: ['sass', 'cssmin', 'ngtemplates', 'concat', 'uglify'],
                 options: { event: ['all'], livereload:true }
+            },
+            html: {
+                files: ['index.html','admin.html'],
+                options: { event: ['all'], livereload:true }
             }
         },
 
