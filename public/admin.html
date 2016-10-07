@@ -66,7 +66,7 @@
                         <div class="ibox-content">
                             <form class="form-horizontal">
                                 <p>
-                                    <a href="" ng-click="func.selectDataType('projects');">&bull;&nbsp;Projects</a>
+                                    <a href="" ng-click="func.selectDataType('projects');">&bull;&nbsp;Releases</a>
                                 </p>
                                 <p>
                                     <a href="" ng-click="func.selectDataType('tasks');">&bull;&nbsp;Tasks</a>
@@ -89,7 +89,7 @@
                 <div class="col-lg-10" ng-show="vm.showing === 'projects'">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Projects</h5>
+                            <h5>Releases</h5>
                             <div class="ibox-tools">
                                 <a class="" ng-click="vm.showing = ''">
                                     <i class="fa fa-times"></i>
@@ -117,7 +117,7 @@
 
                                         </tbody>
                                     </table>
-                                    <input type="button" ng-click="func.editProject(undefined);" value="Create a New Project" />
+                                    <input type="button" ng-click="func.editProject(undefined);" value="Create a New Release" />
                                 </div>
                             </form>
                         </div>
@@ -141,7 +141,7 @@
                                         <tr>
                                             <td></td>
                                             <td>Name</td>
-                                            <td>Associated Project</td>
+                                            <td>Associated Release</td>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -289,8 +289,8 @@
                 <div class="col-lg-7 col-lg-offset-2">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5 ng-show="vm.isNewItem === true">New Project</h5>
-                            <h5 ng-show="vm.isNewItem !== true">Edit Project</h5>
+                            <h5 ng-show="vm.isNewItem === true">New Release</h5>
+                            <h5 ng-show="vm.isNewItem !== true">Edit Release</h5>
                             <div class="ibox-tools">
                                 <a ng-click="vm.editingProject = false">
                                     <i class="fa fa-times"></i>
@@ -301,7 +301,7 @@
                             <form class="form-horizontal">
                                 <div class="form-group"><label class="col-lg-2 control-label">ID</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="New Project" readonly class="form-control" ng-model="vm.editingProjectInfo._id">
+                                        <input type="text" placeholder="New Release" readonly class="form-control" ng-model="vm.editingProjectInfo._id">
                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-2 control-label">Name</label>
@@ -423,7 +423,7 @@
                                         <input type="text" placeholder="Name" class="form-control" ng-model="vm.editingTaskInfo.name">
                                     </div>
                                 </div>
-                                <div class="form-group"><label class="col-lg-2 control-label">Project</label>
+                                <div class="form-group"><label class="col-lg-2 control-label">Release</label>
                                     <div class="col-lg-10">
                                         <select ng-model="vm.editingTaskInfo.project" ng-options="option._id as option.name for option in vm.projects"></select>
                                     </div>
@@ -636,7 +636,7 @@
                                         <img ng-src="{{vm.editingUserInfo.pictureUrl}}" style="max-width: 200px; max-height: 200px;">
                                     </div>
                                 </div>
-                                <div class="form-group"><label class="col-lg-2 control-label">Projects</label>
+                                <div class="form-group"><label class="col-lg-2 control-label">Releases</label>
                                     <div class="col-lg-10">
                                         <div ng-repeat="project in vm.projects">
                                             <input
