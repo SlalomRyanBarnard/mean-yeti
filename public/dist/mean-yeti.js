@@ -431,9 +431,9 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
 ;(function(angular) {
 
 
-    angular.module('mean-yeti').controller('index.controller', ['$scope', 'Api', '$timeout', IndexController]);
+    angular.module('mean-yeti').controller('index.controller', ['$scope', 'Api', '$timeout', '$filter', IndexController]);
 
-    function IndexController($scope, api, $timeout) {
+    function IndexController($scope, api, $timeout, $filter) {
 
         // Sets up a namespace to put data
         $scope.vm = {};
@@ -494,6 +494,16 @@ angular.module('mean-yeti', [ 'ngSanitize' ])
                                     api.getProjectDetails(project._id).then(function(result) {
                                        project.details = result.data;
                                         vm.apiCalls--;
+                                    });
+                                });
+
+                                api.getLayer7Users().then(function(roles) {
+                                    console.log(roles);
+                                    vm.users.forEach(function(user) {
+                                        var role = $filter('filter')(roles.data, { _id: user._id}, true);
+                                        if (role) {
+                                            user.role = role[0].role;
+                                        }
                                     });
                                 });
 
@@ -930,11 +940,22 @@ function ApiService($http) {
         remove: remove,
         update: update,
         getProjectDetails: getProjectDetails,
+        getLayer7Users: getLayer7Users,
         endpoint: endpoint
     };
 
     return service;
 
+    /**
+     *
+     * @returns {*}
+     */
+    function getLayer7Users() {
+        return $http({
+            method: 'GET',
+            url: 'https://apipmdev.beachbody.com:7443/api/meanyeti/users'
+        });
+    };
 
     /**
      *

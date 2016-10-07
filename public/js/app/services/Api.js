@@ -20,11 +20,22 @@ function ApiService($http) {
         remove: remove,
         update: update,
         getProjectDetails: getProjectDetails,
+        getLayer7Users: getLayer7Users,
         endpoint: endpoint
     };
 
     return service;
 
+    /**
+     *
+     * @returns {*}
+     */
+    function getLayer7Users() {
+        return $http({
+            method: 'GET',
+            url: 'https://apipmdev.beachbody.com:7443/api/meanyeti/users'
+        });
+    };
 
     /**
      *

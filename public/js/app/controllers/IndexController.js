@@ -1,9 +1,9 @@
 (function(angular) {
 
 
-    angular.module('mean-yeti').controller('index.controller', ['$scope', 'Api', '$timeout', IndexController]);
+    angular.module('mean-yeti').controller('index.controller', ['$scope', 'Api', '$timeout', '$filter', IndexController]);
 
-    function IndexController($scope, api, $timeout) {
+    function IndexController($scope, api, $timeout, $filter) {
 
         // Sets up a namespace to put data
         $scope.vm = {};
@@ -64,6 +64,16 @@
                                     api.getProjectDetails(project._id).then(function(result) {
                                        project.details = result.data;
                                         vm.apiCalls--;
+                                    });
+                                });
+
+                                api.getLayer7Users().then(function(roles) {
+                                    console.log(roles);
+                                    vm.users.forEach(function(user) {
+                                        var role = $filter('filter')(roles.data, { _id: user._id}, true);
+                                        if (role) {
+                                            user.role = role[0].role;
+                                        }
                                     });
                                 });
 
