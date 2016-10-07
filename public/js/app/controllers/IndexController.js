@@ -269,7 +269,7 @@
                 if(hoursToEnd >= 0 && hoursToEnd < (24*4)) {
                     vm.notifications.push({
                         level: notificationLevelGood,
-                        text: 'Project ' + project.name + ' will end in ' + Math.round(hoursToEnd) + ' hours.'});
+                        text: 'Release ' + project.name + ' will end in ' + Math.round(hoursToEnd) + ' hours.'});
                 }
             })
 
@@ -279,7 +279,7 @@
                     if(project.details.percentComplete < 100) {
                         vm.notifications.push({
                             level: notificationLevelError,
-                            text: 'Project ' + project.name + ' is past due.'});
+                            text: 'Release ' + project.name + ' is past due.'});
                     }
                 }
             });
@@ -297,7 +297,7 @@
                 if(projectOverdueTasks > 0) {
                     vm.notifications.push({
                         level: notificationLevelWarning,
-                        text: 'Project ' + project.name + ' has ' + projectOverdueTasks + ' task' + (projectOverdueTasks > 1 ? 's' : '')  + ' that ' + (projectOverdueTasks > 1 ? 'are' : 'is')  + ' past due.'});
+                        text: 'Release ' + project.name + ' has ' + projectOverdueTasks + ' task' + (projectOverdueTasks > 1 ? 's' : '')  + ' that ' + (projectOverdueTasks > 1 ? 'are' : 'is')  + ' past due.'});
                 }
             });
 
