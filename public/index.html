@@ -181,7 +181,13 @@
                                                         <div class="col-lg-5">
                                                             <dl class="dl-horizontal">
 
-                                                                <dt>Epic Link:</dt> <dd><a href="#" target="_blank"><i class="fa fa-external-link"></i> NH-21</a></dd>
+                                                                <dt ng-show="vm.selectedProject.jiraTicketId !== undefined && vm.selectedProject.jiraTicketId.length > 0">
+                                                                    JIRA Epic Link:
+                                                                </dt>
+                                                                <dd ng-show="vm.selectedProject.jiraTicketId !== undefined && vm.selectedProject.jiraTicketId.length > 0">
+                                                                    <a ng-href="https://jira.productpartners.com/browse/{{vm.selectedProject.jiraTicketId}}" target="_blank">
+                                                                        <i class="fa fa-external-link"></i> {{vm.selectedProject.jiraTicketId}}</a>
+                                                                </dd>
                                                                 <dt>Delivery Lead:</dt> <dd ng-repeat="resource in vm.resources | filter:{_id:vm.selectedProject.deliveryLead}"><span ng-bind="resource.name"></span></dd>
                                                                 <dt>System(s):</dt> <dd><span href="#" class="text-navy" ng-bind="vm.selectedProject.systems.join(', ')"></span> </dd>
                                                                 
@@ -208,7 +214,7 @@
                                                                     <div class="progress progress-striped active m-b-sm">
                                                                         <div ng-style="{'width':vm.selectedProject.details.percentComplete+'%'}" class="progress-bar"></div>
                                                                     </div>
-                                                                    <small>Project completion <strong>{{vm.selectedProject.details.percentComplete | number:0}}%</strong>.</small>
+                                                                    <small>Release completion <strong>{{vm.selectedProject.details.percentComplete | number:0}}%</strong>.</small>
                                                                 </dd>
                                                             </dl>
                                                         </div>
