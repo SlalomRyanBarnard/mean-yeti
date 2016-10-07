@@ -61,7 +61,7 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Projects</span> <span class="fa arrow"></span></a>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Releases</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li ng-repeat="project in vm.projects" ng-class="{active: vm.selectedProject === project}">
                                 <a href="" ng-click="func.selectProject(project);"><span ng-bind="project.name"></span></a>
@@ -126,7 +126,7 @@
                         <div class="wrapper wrapper-content">
                             <div ng-show="vm.currentUser.projects.length > 0" class="row">
                                 <div class="col-lg-12">
-                                    <h3>Watched Projects</h3>
+                                    <h3>Watched Releases</h3>
                                 </div>
                             </div>
                             <!-- status charts -->
@@ -296,7 +296,7 @@
                                                                         </div>
 
                                                                         <div class="vertical-timeline-content">
-                                                                            <h2>Project Complete</h2>
+                                                                            <h2>Release Date</h2>
                                                                             <p></p>
                                                                             <span class="vertical-date">
                                                                                 <span ng-bind="vm.selectedProject.endDate | date:'EEEE'"></span>
@@ -340,7 +340,7 @@
                                                                         </div>
 
                                                                         <div class="vertical-timeline-content">
-                                                                            <h2>Project Start</h2>
+                                                                            <h2>Start Work</h2>
                                                                             <p></p>
                                                                             <span class="vertical-date">
                                                                                 <span ng-bind="vm.selectedProject.startDate | date:'EEEE'"></span>
@@ -410,7 +410,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="wrapper wrapper-content project-description">
-                                            <h4>Project description</h4>
+                                            <h4>Release description</h4>
                                             <p class="small" ng-bind="vm.selectedProject.description">
                                             </p>
                                             <p class="small font-bold">
@@ -418,7 +418,7 @@
                                                 <span ng-show="vm.selectedProject.priority === 'Medium'"><i class="fa fa-circle text-warning"></i> Medium priority</span>
                                                 <span ng-show="vm.selectedProject.priority === 'Low'"><i class="fa fa-circle text-success"></i> Low priority</span>
                                             </p>
-                                            <h5>Project tags</h5>
+                                            <h5>Release tags</h5>
                                             <ul class="tag-list" style="padding: 0">
                                                 <li ng-repeat="tag in vm.selectedProject.tags"><a href=""><i class="fa fa-tag"></i> {{tag}}</a></li>
                                             </ul>
